@@ -23,7 +23,6 @@ public class RedDePetri {
 	}
 	
 	//Getters
-	
 	public int[] getMarcaActual() {
 		return marcaActual;
 	}

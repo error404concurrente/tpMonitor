@@ -15,6 +15,7 @@ public class Main {
 			}
 			System.out.println("");
 		}
+		//asdjhaskdjhsajkh
 		
 		RedDePetri rdp = new RedDePetri(inc, transitions, marking);
 	}

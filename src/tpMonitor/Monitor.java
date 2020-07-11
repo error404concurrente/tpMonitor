@@ -6,6 +6,7 @@ import java.util.concurrent.Semaphore;
 
 public class Monitor {
 	//TODO reemplazar Thread por lo que sea que usemos
+	private RedDePetri rdp;
 	private Queue<Thread> entrada;
 	private Queue<Thread> espera;
 	
@@ -15,7 +16,9 @@ public class Monitor {
 	private Semaphore vacio;
 	private Semaphore mutex;
 	
-	public Monitor(int max) {
+	public Monitor(int max, RedDePetri red) {
+		rdp = red;
+		
 		entrada = new ConcurrentLinkedDeque<Thread>();
 		espera = new ConcurrentLinkedDeque<Thread>();
 		
@@ -38,7 +41,7 @@ public class Monitor {
 			System.out.println("ERROR DE ENTRADA DE MONITOR AIUDA");
 			e.printStackTrace();
 		}
-		//Añadir a cola de entrada
+		//Aï¿½adir a cola de entrada
 		entrada.add(hilo);
 		hilo.wait(); //TODO Discutir si lo hacemos antes o despues de meterlo a la cola
 		

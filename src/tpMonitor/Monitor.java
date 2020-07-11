@@ -26,7 +26,7 @@ public class Monitor {
 		mutex = new Semaphore(1);
 	}
 	
-	public boolean enter(Thread hilo) throws InterruptedException {
+	public boolean enter(Thread hilo) throws InterruptedException {	
 		//TODO discutir si lo dejamos boolean
 		//TODO Controlar que lo que entre no esta ya adentro
 		
@@ -38,7 +38,7 @@ public class Monitor {
 			System.out.println("ERROR DE ENTRADA DE MONITOR AIUDA");
 			e.printStackTrace();
 		}
-		//Añadir a cola de entrada
+		//Aï¿½adir a cola de entrada
 		entrada.add(hilo);
 		hilo.wait(); //TODO Discutir si lo hacemos antes o despues de meterlo a la cola
 		

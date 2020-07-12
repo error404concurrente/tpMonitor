@@ -2,25 +2,27 @@ package tpMonitor;
 
 import java.util.ArrayList;
 
-abstract class Hilo implements Runnable{
-	ArrayList<int[]> tareas;
+public class Hilo implements Runnable{
+	int[] tarea;
 	Monitor monitor;
 	
-	public Hilo(Monitor moni){
+	public Hilo(Monitor monitor, int[] tarea){
 		System.out.println("Se ha creado un hilo");
-		monitor = moni;
+		this.monitor = monitor;
+		this.tarea = tarea;
 	}
 	
 	public void run(){
-		
+		try {
+			monitor.enter(this);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void addTarea(int[] tarea){
-		/**Añade tareas al hilo, Ej:
-		 *  tarea = {0,0,0,1}
-		 *  hilo.add(tarea);
-		 *  hilo.tareas seria {...,{0,0,0,1}}
-		 */
-		tareas.add(tarea);
-	}	
+	public int[] getTarea() {
+		return tarea;
+	}
+	
 }

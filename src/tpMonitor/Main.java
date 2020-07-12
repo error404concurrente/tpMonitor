@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[][] inc = {{0,0,0,0,1,1},{1,0,0,0,0,0},{0,1,0,0,0,0},{0,0,0,1,0,0},{0,0,1,0,0,0}};
+		int[][] inc = {{-1,-1,0,0,1,1},{1,0,0,-1,0,0},{0,1,-1,0,0,0},{0,0,0,1,0,-1},{0,0,1,0,-1,0}};
 		int[] marking = {1,0,0,0,0};
 		int[] transitions = {1,1,0,0,0,0};
 		final int cantHilos = 99;

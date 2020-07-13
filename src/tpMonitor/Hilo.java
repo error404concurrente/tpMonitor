@@ -7,7 +7,6 @@ public class Hilo implements Runnable{
 	Monitor monitor;
 	
 	public Hilo(Monitor monitor, int[] tarea){
-		System.out.println("Se ha creado un hilo");
 		this.monitor = monitor;
 		this.tarea = tarea;
 	}
@@ -19,6 +18,14 @@ public class Hilo implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String strTarea() {
+		String v = "";
+		for (int i = 0; i < tarea.length; i++) {
+			v = v+tarea[i]+", ";
+		}
+		return v;
 	}
 	
 	public int[] getTarea() {

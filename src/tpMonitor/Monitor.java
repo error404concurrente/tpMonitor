@@ -35,33 +35,33 @@ public class Monitor {
 		
 		//Obtencion de los semaforos
 		try {
-			vacio.acquire();
+			//vacio.acquire();
 			mutex.acquire();
 		} catch (InterruptedException e) {
 			System.out.println("ERROR DE ENTRADA DE MONITOR AIUDA");
 			e.printStackTrace();
 		}
 		
-		System.out.println(Thread.currentThread().getName());
+		//System.out.println("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 		
 		if( rdp.verificarCompatibilidad(hilo.getTarea()) ) {
-			System.out.println("ES COMPATIBLE");
-			rdp.printActual();
+			System.out.println("Compatibilidad Confirmada");
+			System.out.println("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+			System.out.println("-------------- Resultados --------------");
+			System.out.println("Estado de RdP Antes:   "+rdp.strMarcaActual()+"  ----  T. Sensibles Antes:   "+rdp.strTranSensible());
 			rdp.calcularMarcaActual(hilo.getTarea());
-			rdp.printActual();
-			System.out.println(" -------------- ");
-			rdp.printSensible();
 			rdp.calcularVectorSensible();
-			rdp.printSensible();
+			System.out.println("Estado de RdP Despues: "+rdp.strMarcaActual()+"  ----  T. Sensibles Despues: "+rdp.strTranSensible());
+			System.out.println("-------------- Fin Resultados --------------");
+			System.out.println("Hilo exit-ante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 		}else {
 			System.out.println("NO ES COMPATIBLE-PA JUERA");
 		}
-		vacio.release();
+
+		//Liberar semaforos
+		//vacio.release();
 		mutex.release();
 		
-		//hilo.wait(); //TODO Discutir si lo hacemos antes o despues de meterlo a la cola
-		
-		//Liberar semaforos
 		return true;
 	}
 }

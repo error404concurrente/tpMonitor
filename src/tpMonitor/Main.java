@@ -1,22 +1,25 @@
 package tpMonitor;
 
-public class Main {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class Main {
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+	
+	public static void main(String[] args) throws FileNotFoundException {
+		//Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		
+		//Descomentar la siguiente linea para generar logs
+		//System.setOut(new PrintStream(new File("log.txt")));
+		
 		int[][] inc = {{-1,-1,0,0,1,1},{1,0,0,-1,0,0},{0,1,-1,0,0,0},{0,0,0,1,0,-1},{0,0,1,0,-1,0}};
 		int[] marking = {1,0,0,0,0};
 		int[] transitions = {1,1,0,0,0,0};
 		final int cantHilos = 99;
- 		
-		
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 6; j++) {
-				System.out.print(inc[i][j]+" ");
-			}
-			System.out.println("");
-		}
-		
+ 				
 		//Creación de RpP
 		RedDePetri rdp = new RedDePetri(inc, transitions, marking);
 		
@@ -24,14 +27,14 @@ public class Main {
 		Monitor monitor = new Monitor(cantHilos, rdp);
 		
 		//CReacion hilo
-		int[] tarea = {0,0,0,0,0,0};
-		for (int i = 0; i < 6; i++) {
-			tarea[i]=1;
-			Hilo hilo = new Hilo(monitor, tarea);
-			Thread hilito = new Thread(hilo, "hilito"+i);
-			hilito.start();
-			tarea[i]=0;
-		}
+//		int[] tarea = {0,0,0,0,0,0};
+//		for (int i = 0; i < 6; i++) {
+//			tarea[i]=1;
+//			Hilo hilo = new Hilo(monitor, tarea);
+//			Thread hilito = new Thread(hilo, "hilito"+i);
+//			hilito.start();
+//			tarea[i]=0;
+//		}
 		
 		int[] tarea0 = {1,0,0,0,0,0};
 		int[] tarea1 = {0,1,0,0,0,0};

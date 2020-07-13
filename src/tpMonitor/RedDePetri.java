@@ -40,20 +40,23 @@ public class RedDePetri {
 		for (int i = 0; i < matrizIncidencia.length; i++) {
 			aux = 0;
 			for (int j = 0; j < matrizIncidencia[0].length; j++) {
-				aux += matrizIncidencia[i][j]*disparo[j];
+				aux += matrizIncidencia[i][j]*disparo[j]; //Ecuacion de Estado
 			}
 			marcaActual[i]+=aux;
 		}
 	}
 	
 	public void calcularVectorSensible(){
-		int[] s = new int[matrizIncidencia[0].length];
+		int[] s = new int[matrizIncidencia[0].length];  //vector auxiliar S
 		
 		for (int i = 0; i < matrizIncidencia[0].length; i++) { //Recorrer columnas
 			for (int j = 0; j < matrizIncidencia.length; j++) { //Recorrer filas
-				s[j] = marcaActual[j] + matrizIncidencia[j][i];	
+				s[j] = marcaActual[j] + matrizIncidencia[j][i];	//Calculo de S
 			}
-			
+			/**Crear nuevo vector de transiciones sensibilizadas
+			 * En la posicion i va a ser 1 si no hay valores negativos en S,
+			 * de otra forma será 0 
+			 */
 			tranSensibilizadas[i]=1;
 			for (int x = 0; x < s.length; x++) {
 				if(s[x]<0){
@@ -74,18 +77,20 @@ public class RedDePetri {
 	public int[] getMarcaInicial() {
 		return marcaInicial;
 	}
-	public void printSensible() {
+	public String strTranSensible() {
+		String v = "";
 		for (int i = 0; i < tranSensibilizadas.length; i++) {
-			System.out.print(tranSensibilizadas[i]+", ");
+			v = v+tranSensibilizadas[i]+", ";
 		}
-		System.out.println("");
+		return v;
 	}
 	
-	public void printActual() {
+	public String strMarcaActual() {
+		String v = "";
 		for (int i = 0; i < marcaActual.length; i++) {
-			System.out.print(marcaActual[i]+", ");
+			v+=marcaActual[i]+", ";
 		}
-		System.out.println("");
+		return v;
 	}
 	
 	public int[] getTranSensibilizadas() {

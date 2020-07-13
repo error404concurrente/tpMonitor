@@ -20,22 +20,36 @@ public class RedDePetri {
 		marcaActual = newCurrent;
 	}
 	
-	public void protocoloAlfa() {
-		System.out.println("RDP - Usted ha activado el protocolo alfa");
+	public boolean disparar(Hilo hilo) {
+		if(verificarCompatibilidad(hilo.getTarea())) {
+			Log.spit("Compatibilidad Confirmada");
+			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+			Log.spit("-------------- Resultados --------------");
+			Log.spit("Estado de RdP Antes:   "+strMarcaActual()+"  ----  T. Sensibles Antes:   "+strTranSensible());
+			calcularMarcaActual(hilo.getTarea());
+			calcularVectorSensible();
+			Log.spit("Estado de RdP Despues: "+strMarcaActual()+"  ----  T. Sensibles Despues: "+strTranSensible());
+			Log.spit("-------------- Fin Resultados --------------");
+			return true;
+		}else {
+			Log.spit("Incompatible");
+			return false;
+		}
+		
 	}
 	
-	public boolean verificarCompatibilidad(int[] tarea){
+	private boolean verificarCompatibilidad(int[] tarea){
 		//Ej: verificarCompatibilidad(hilo.getTarea())
 		for(int i = 0; i < tranSensibilizadas.length; i++) {
 			if(tranSensibilizadas[i]==1 && tarea[i]==1){
-				System.out.println("RDP - Transicion detectada: T"+i);
+				Log.spit("RDP - Transicion detectada: T"+i);
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void calcularMarcaActual(int[] disparo){
+	private void calcularMarcaActual(int[] disparo){
 		int aux;
 		for (int i = 0; i < matrizIncidencia.length; i++) {
 			aux = 0;
@@ -46,7 +60,7 @@ public class RedDePetri {
 		}
 	}
 	
-	public void calcularVectorSensible(){
+	private void calcularVectorSensible(){
 		int[] s = new int[matrizIncidencia[0].length];  //vector auxiliar S
 		
 		for (int i = 0; i < matrizIncidencia[0].length; i++) { //Recorrer columnas

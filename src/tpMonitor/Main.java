@@ -1,27 +1,12 @@
 package tpMonitor;
 
-import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
-import java.security.Timestamp;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 public class Main {
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("[dd:mm:yyyy]-[HH:mm:ss]: ");
-	
+
 	public static void main(String[] args) throws FileNotFoundException {
-		//Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		SimpleDateFormat sdfTitulo = new SimpleDateFormat("[dd:mm:yyyy]-[HH:mm:ss]: ");
-		
-		//SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]: ");
-		Date resultdate = new Date(System.currentTimeMillis());
-		System.out.println(sdf.format(resultdate));
-		java.util.concurrent.TimeUnit.SECONDS.sleep(5);
-		System.out.println(sdf.format(resultdate));
-		
-		//Descomentar la siguiente linea para generar logs
-		//System.setOut(new PrintStream(new File("log"+sdfTitulo.format(resultdate)+".txt")));
+		//Log.createLog();//Obligatorio para log
 		
 		int[][] inc = {{-1,-1,0,0,1,1},{1,0,0,-1,0,0},{0,1,-1,0,0,0},{0,0,0,1,0,-1},{0,0,1,0,-1,0}};
 		int[] marking = {1,0,0,0,0};
@@ -34,16 +19,7 @@ public class Main {
 		//Creación de Monitor
 		Monitor monitor = new Monitor(cantHilos, rdp);
 		
-		//CReacion hilo
-//		int[] tarea = {0,0,0,0,0,0};
-//		for (int i = 0; i < 6; i++) {
-//			tarea[i]=1;
-//			Hilo hilo = new Hilo(monitor, tarea);
-//			Thread hilito = new Thread(hilo, "hilito"+i);
-//			hilito.start();
-//			tarea[i]=0;
-//		}
-		
+		//CReacion hilo	
 		int[] tarea0 = {1,0,0,0,0,0};
 		int[] tarea1 = {0,1,0,0,0,0};
 		int[] tarea2 = {0,0,1,0,0,0};

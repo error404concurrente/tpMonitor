@@ -1,0 +1,20 @@
+NO ES COMPATIBLE-PA JUERA
+NO ES COMPATIBLE-PA JUERA
+NO ES COMPATIBLE-PA JUERA
+RDP - Transicion detectada: T0
+Compatibilidad Confirmada
+Hilo entrante: hilito0  Disparo: 1, 0, 0, 0, 0, 0, 
+-------------- Resultados --------------
+Estado de RdP Antes:   1, 0, 0, 0, 0,   ----  T. Sensibles Antes:   1, 1, 0, 0, 0, 0, 
+Estado de RdP Despues: 0, 1, 0, 0, 0,   ----  T. Sensibles Despues: 0, 0, 0, 1, 0, 0, 
+-------------- Fin Resultados --------------
+Hilo exit-ante: hilito0  Disparo: 1, 0, 0, 0, 0, 0, 
+RDP - Transicion detectada: T3
+Compatibilidad Confirmada
+Hilo entrante: hilito3  Disparo: 0, 0, 0, 1, 0, 0, 
+-------------- Resultados --------------
+Estado de RdP Antes:   0, 1, 0, 0, 0,   ----  T. Sensibles Antes:   0, 0, 0, 1, 0, 0, 
+Estado de RdP Despues: 0, 0, 0, 1, 0,   ----  T. Sensibles Despues: 0, 0, 0, 0, 0, 1, 
+-------------- Fin Resultados --------------
+Hilo exit-ante: hilito3  Disparo: 0, 0, 0, 1, 0, 0, 
+NO ES COMPATIBLE-PA JUERA

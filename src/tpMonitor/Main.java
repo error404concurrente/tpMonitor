@@ -4,16 +4,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.Timestamp;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class Main {
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("[dd:mm:yyyy]-[HH:mm:ss]: ");
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		//Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat sdfTitulo = new SimpleDateFormat("[dd:mm:yyyy]-[HH:mm:ss]: ");
+		
+		//SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]: ");
+		Date resultdate = new Date(System.currentTimeMillis());
+		System.out.println(sdf.format(resultdate));
+		java.util.concurrent.TimeUnit.SECONDS.sleep(5);
+		System.out.println(sdf.format(resultdate));
 		
 		//Descomentar la siguiente linea para generar logs
-		//System.setOut(new PrintStream(new File("log.txt")));
+		//System.setOut(new PrintStream(new File("log"+sdfTitulo.format(resultdate)+".txt")));
 		
 		int[][] inc = {{-1,-1,0,0,1,1},{1,0,0,-1,0,0},{0,1,-1,0,0,0},{0,0,0,1,0,-1},{0,0,1,0,-1,0}};
 		int[] marking = {1,0,0,0,0};

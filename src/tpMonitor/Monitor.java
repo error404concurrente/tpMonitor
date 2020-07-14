@@ -18,12 +18,9 @@ public class Monitor {
 	
 	public Monitor(int max, RedDePetri red) {
 		rdp = red;
-		
 		//entrada = new ConcurrentLinkedDeque<Hilo>();
 		espera = new ConcurrentLinkedDeque<Hilo>();
-		
 		size = max;
-		
 		lleno = new Semaphore(0);
 		vacio = new Semaphore(size);
 		mutex = new Semaphore(1);
@@ -35,7 +32,7 @@ public class Monitor {
 		
 		//Obtencion de los semaforos
 		try {
-			//vacio.acquire();
+			vacio.acquire();
 			mutex.acquire();
 		} catch (InterruptedException e) {
 			Log.spit("ERROR DE ENTRADA DE MONITOR AIUDA");
@@ -51,7 +48,7 @@ public class Monitor {
 		}
 
 		//Liberar semaforos
-		//vacio.release();
+		vacio.release();
 		mutex.release();
 		
 		return true;

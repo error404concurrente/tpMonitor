@@ -35,7 +35,6 @@ public class RedDePetri {
 			Log.spit("Incompatible");
 			return false;
 		}
-		
 	}
 	
 	private boolean verificarCompatibilidad(int[] tarea){

@@ -20,6 +20,7 @@ public class Hilo implements Runnable{
 		}
 	}
 	
+	
 	public String strTarea() {
 		String v = "";
 		for (int i = 0; i < tarea.length; i++) {

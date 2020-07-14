@@ -49,7 +49,9 @@ public class Monitor {
 			Log.spit("NO ES COMPATIBLE-PA JUERA");
 		}
 
-		// Liberar semaforos
+
+		//Liberar semaforos
+		vacio.release();
 		mutex.release();
 		vacio.release();
 		Thread.sleep(2000);

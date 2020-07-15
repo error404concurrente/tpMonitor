@@ -21,9 +21,10 @@ public class RedDePetri {
 	}
 	
 	public boolean disparar(Hilo hilo) {
+		Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 		if(verificarCompatibilidad(hilo.getTarea())) {
 			Log.spit("Compatibilidad Confirmada");
-			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+//			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 			Log.spit("-------------- Resultados --------------");
 			Log.spit("Estado de RdP Antes:   "+strMarcaActual()+"  ----  T. Sensibles Antes:   "+strTranSensible());
 			calcularMarcaActual(hilo.getTarea());
@@ -37,7 +38,7 @@ public class RedDePetri {
 		}
 	}
 	
-	private boolean verificarCompatibilidad(int[] tarea){
+	public boolean verificarCompatibilidad(int[] tarea){
 		//Ej: verificarCompatibilidad(hilo.getTarea())
 		for(int i = 0; i < tranSensibilizadas.length; i++) {
 			if(tranSensibilizadas[i]==1 && tarea[i]==1){

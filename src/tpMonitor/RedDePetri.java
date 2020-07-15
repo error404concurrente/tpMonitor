@@ -21,32 +21,33 @@ public class RedDePetri {
 	}
 	
 	public boolean disparar(Hilo hilo) {
-		Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+		Log.spit("RdP: Analizando compatibilidad de "+Thread.currentThread().getName()+"  Disparo: {"+hilo.strTarea()+"}");
 		if(verificarCompatibilidad(hilo.getTarea())) {
-			Log.spit("Compatibilidad Confirmada");
+			Log.spit("RdP: Compatibilidad Confirmada a "+Thread.currentThread().getName());
 //			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
-			Log.spit("-------------- Resultados --------------");
+			Log.spit("-------------- Resultados de Disparo --------------");
 			Log.spit("Estado de RdP Antes:   "+strMarcaActual()+"  ----  T. Sensibles Antes:   "+strTranSensible());
 			calcularMarcaActual(hilo.getTarea());
 			calcularVectorSensible();
 			Log.spit("Estado de RdP Despues: "+strMarcaActual()+"  ----  T. Sensibles Despues: "+strTranSensible());
-			Log.spit("-------------- Fin Resultados --------------");
+			Log.spit("------------------ Fin Resultados -----------------");
 			return true;
 		}else {
-			Log.spit("Compatibilidad Denegada");
+			Log.spit("RdP: Compatibilidad Denegada a "+Thread.currentThread().getName());
 			return false;
 		}
 	}
 	
 	public boolean verificarCompatibilidad(int[] tarea){
 		//Ej: verificarCompatibilidad(hilo.getTarea())
+		boolean compatible = false;
 		for(int i = 0; i < tranSensibilizadas.length; i++) {
 			if(tranSensibilizadas[i]==1 && tarea[i]==1){
-				Log.spit("RDP - Transicion detectada: T"+i);
-				return true;
+				Log.spit("RDP: Transicion compatible detectada: T"+i);
+				compatible = true;
 			}
 		}
-		return false;
+		return compatible;
 	}
 	
 	private void calcularMarcaActual(int[] disparo){

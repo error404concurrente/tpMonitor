@@ -4,7 +4,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Semaphore;
 
-public class Monitor {
+public final class Monitor {
 	//TODO reemplazar Thread por lo que sea que usemos
 	private RedDePetri rdp;
 	private Queue<Hilo> entrada;
@@ -12,49 +12,51 @@ public class Monitor {
 	
 	private int size;
 	
-	private Semaphore lleno;
-	private Semaphore vacio;
+//	private Semaphore espera;
+//	private Semaphore entrada;
 	private Semaphore mutex;
 	
 	public Monitor(int max, RedDePetri red) {
 		rdp = red;
-		//entrada = new ConcurrentLinkedDeque<Hilo>();
+		entrada = new ConcurrentLinkedDeque<Hilo>();
 		espera = new ConcurrentLinkedDeque<Hilo>();
 		size = max;
-		lleno = new Semaphore(0);
-		vacio = new Semaphore(size);
-		mutex = new Semaphore(1);	
+//		espera = new Semaphore(size);
+//		entrada = new Semaphore(size);
+		mutex = new Semaphore(1,true);	
 	}
 	
 	public void enter(Hilo hilo) throws InterruptedException{
-		//TODO discutir si lo dejamos boolean
-		//TODO Controlar que lo que entre no esta ya adentro
-
 		// Obtencion de los semaforos
 		try {
-			vacio.acquire();
 			mutex.acquire();
-			// hilo.wait();
 		} catch (InterruptedException e) {
 			Log.spit("ERROR DE ENTRADA DE MONITOR AIUDA");
 			e.printStackTrace();
 		}
-
-		// Log.spit("Hilo entrante: "+Thread.currentThread().getName()+" Disparo:
-		// "+hilo.strTarea());
-
+		execute(hilo);
+	}
+	
+	private void execute(Hilo hilo) throws InterruptedException {
 		if (rdp.disparar(hilo)) {
-			Log.spit("ENTREEEEEEEEEEEEEEE");
+			despertarEspera(hilo);
 		} else {
-			Log.spit("NO ES COMPATIBLE-PA JUERA");
+			Log.spit("NO ES COMPATIBLE-PA la espera");
+			encolar(espera, hilo);
+			mutex.release();
 		}
-
-
-		//Liberar semaforos
-		vacio.release();
-		mutex.release();
-		vacio.release();
-		Thread.sleep(2000);
-		// hilo.notifyAll();
+	}
+	
+	private void despertarEspera(Hilo hilo) throws InterruptedException {
+		execute(hilo);
+	}
+	
+	private void encolar(Queue <Hilo> cola, Hilo hilo) throws InterruptedException {
+		cola.add(hilo);
+		hilo.wait();
+	}
+	
+	private void desEncolar(Queue <Hilo> cola){
+		cola.poll().notify();
 	}
 }

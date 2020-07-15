@@ -32,10 +32,9 @@ public class RedDePetri {
 			Log.spit("-------------- Fin Resultados --------------");
 			return true;
 		}else {
-			Log.spit("Incompatible");
+			Log.spit("Compatibilidad Denegada");
 			return false;
 		}
-		
 	}
 	
 	private boolean verificarCompatibilidad(int[] tarea){

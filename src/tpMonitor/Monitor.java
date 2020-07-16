@@ -16,14 +16,18 @@ public final class Monitor {
 	private Semaphore entrada;
 	private Semaphore mutex;
 	
-	public Monitor(int max, RedDePetri red) {
+	private Politicas politica;
+	
+	public Monitor(int max, RedDePetri red, Politicas politica) {
 		rdp = red;
 //		entrada = new ConcurrentLinkedDeque<Hilo>();
 		espera = new ConcurrentLinkedDeque<Hilo>();
 		size = max;
 //		espera = new Semaphore(size);
 		entrada = new Semaphore(1,true);
-		mutex = new Semaphore(1,true);	
+		mutex = new Semaphore(1,true);
+		
+		this.politica = politica;
 	}
 	
 	public void enter(Hilo hilo) throws InterruptedException{
@@ -61,16 +65,39 @@ public final class Monitor {
 		boolean encontrado = false;
 		for(Hilo hilito: espera) {
 			if( rdp.verificarCompatibilidad(hilito.getTarea())) {
-				//ver politica
-				Log.spit("HAY UN HILO PARA DESPERTAR");
-				espera.remove(hilito);
-				synchronized(hilito) {
-				hilito.notify();
+				if( !hilito.getPolitico() ) {
+					Log.spit("NO HAY POLITICA, DESPIERTO AL hilito" + hilito.getID());
+					desEncolar(hilito);
+					encontrado = true;
+					break;
+					}
+				else {
+					Log.spit("HAY POLITICA, DECIDO POR hilito" + hilito.getID());
+					//politica.decidir( hilito, espera );
+					if (politica.decidirYo(hilito)) {
+						Log.spit("LE TOCA AL hilito" + hilito.getID());
+						desEncolar(hilito);
+						encontrado = true;
+						break;
+					}
+					else if(politica.decidirRival(hilito, espera)){
+						for(Hilo hilito2: espera) {
+							if (hilito.getIDR() == hilito2.getID()) {
+								Log.spit("LE TOCA AL hilito" + hilito.getID());
+								desEncolar(hilito2);
+								encontrado = true;
+								break;
+							}
+						}
+						break;
+						}
+					else {
+						Log.spit("LE TOCA AL OTRO HILO PERO NO ESTA");
+					}
 				}
-				encontrado = true;
-				break;
 			}
 		}
+			
 		if(!encontrado) {
 		Log.spit("NO HAY HILITOS PARA DESPERTAR");
 		entrada.release();
@@ -82,14 +109,18 @@ public final class Monitor {
 //	}
 	
 	private void encolar(Queue <Hilo> cola, Hilo hilo) throws InterruptedException {
-		Log.spit("ME VOY A MIMIR" + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+		Log.spit("ME VOY A MIMIR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 		cola.add(hilo);
 		synchronized(hilo){
 		hilo.wait();
 		}
 	}
 	
-//	private void desEncolar(Queue <Hilo> cola){
-//		cola.poll().notify();
-//	}
+	private void desEncolar(Hilo hilito){
+		Log.spit("HAY UN HILO PARA DESPERTAR");
+		espera.remove(hilito);
+		synchronized(hilito) {
+			hilito.notify();
+		}
+	}
 }

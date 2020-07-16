@@ -44,7 +44,11 @@ public final class Monitor {
 	}
 	
 	private void execute(Hilo hilo) throws InterruptedException {
-		if (rdp.disparar(hilo)) {
+//		if (rdp.disparar(hilo)) {
+		if ( rdp.verificarCompatibilidad(hilo.getTarea()) && 
+				( !hilo.getPolitico() || (hilo.getPolitico() && politica.decidirYo(hilo)))) {
+			rdp.disparar(hilo);
+			politica.aumentar(hilo);
 			Log.spit("ES COMPATIBLE");
 			mutex.release();
 			espera();
@@ -83,7 +87,7 @@ public final class Monitor {
 					else if(politica.decidirRival(hilito, espera)){
 						for(Hilo hilito2: espera) {
 							if (hilito.getIDR() == hilito2.getID()) {
-								Log.spit("LE TOCA AL hilito" + hilito.getID());
+								Log.spit("LE TOCA AL hilito" + hilito2.getID());
 								desEncolar(hilito2);
 								encontrado = true;
 								break;

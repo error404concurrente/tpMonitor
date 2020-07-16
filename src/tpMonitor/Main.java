@@ -28,14 +28,15 @@ public class Main {
 		//Creacion hilo
        
 		final int N_TAREAS = 6;
+		politica.inicializar(N_TAREAS);
 		int [][] tareas = {{1,0,0,0,0,0},{0,1,0,0,0,0},{0,0,1,0,0,0},{0,0,0,1,0,0},{0,0,0,0,1,0},{0,0,0,0,0,1}};
 		ArrayList <Thread> hilito = new ArrayList<Thread>();
 		
 		hilito.add(new Thread(new Hilo(monitor, tareas[0], true, 0, 1),"hilito "+0));
-		politica.setContador(0);
+		//politica.setContador(0);
 		hilito.get(0).start();
 		hilito.add(new Thread(new Hilo(monitor, tareas[1], true, 1, 0),"hilito "+1));
-		politica.setContador(1);
+		//politica.setContador(1);
 		hilito.get(1).start();
 		
 		for(int i=2; i<N_TAREAS;i++) {

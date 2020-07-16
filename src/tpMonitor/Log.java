@@ -12,14 +12,14 @@ public class Log {
 	
 	public static void createLog() throws FileNotFoundException {
 		Date resultdate = new Date(System.currentTimeMillis());
-		archivo = new PrintStream(new File("log"+sdfTitulo.format(resultdate)+".txt")); 
-		//Descomentar la siguiente linea para generar logs
+		System.out.println("Log: Creando archivo log...");
+		archivo = new PrintStream(new File("log"+sdfTitulo.format(resultdate)+".txt"));
 		System.setOut(archivo);
 	}
 	
 	public static String ts() {
 		//Funcion global para imprimir timestamps en consola, y por lo tanto en el log
-		SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss]: ");
+		SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm:ss:SSS]: ");
 		Date resultdate = new Date(System.currentTimeMillis());
 		return sdf.format(resultdate);
 	}

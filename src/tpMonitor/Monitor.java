@@ -63,7 +63,10 @@ public final class Monitor {
 				espera.remove(hilito);
 				Log.spit("************ Fin Verificacion Cola de Espera ************");
 				synchronized (hilito) {
+					Log.spit("------------EN NOTIFY()--------------");
+					Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
 					hilito.notify();
+					Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
 				}
 				encontrado = true;
 				break;
@@ -84,7 +87,10 @@ public final class Monitor {
 		Log.spit("Monitor: Entra el hilo " + Thread.currentThread().getName()+" a la Cola de Espera");
 		cola.add(hilo);
 		synchronized(hilo){
+	    Log.spit("------------EN WAIT()--------------");
+	    Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
 		hilo.wait();
+		Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
 		}
 	}
 	

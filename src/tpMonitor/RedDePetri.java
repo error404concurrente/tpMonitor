@@ -1,5 +1,7 @@
 package tpMonitor;
 
+import java.util.Arrays;
+
 public class RedDePetri {
 
 	private int [][] matrizIncidencia;
@@ -14,6 +16,8 @@ public class RedDePetri {
 		tranSensibilizadas = trans;
 		marcaInicial = act;
 		marcaActual = act;
+		//getidentityMatrix(inc.length);
+		concatMatrix(inc,getidentityMatrix(inc.length));
 	}	
 	
 	public void changeCurrent(int[] newCurrent) {
@@ -80,6 +84,56 @@ public class RedDePetri {
 				}
 			}
 		}
+	}
+	private void farkasAlgorithm() {
+		for(int j=0; j<matrizIncidencia[0].length; j++) {
+
+		}
+	}
+	public int[][] getidentityMatrix(int N) {
+		int [][] identity = new int[N][N];
+		for(int i=0; i<N ; i++) {
+			for(int j=0; j<N ; j++) {
+				identity[i][j] = (i==j)? 1 : 0;
+			}
+		}
+		System.out.println("Identidad: ");
+		for(int i=0; i<N ; i++) {
+			System.out.println();
+			for(int j=0; j<N ; j++) {
+				System.out.print(identity[i][j]+" ");
+			}
+		}
+		return identity;
+	}
+	public void concatMatrix(int[][] inc, int[][] id) {
+		
+	    int N = inc.length;
+		int M = inc[0].length + id[0].length;
+		int row=0; int col=0;
+		int[][]concat = new int[N][M];
+		for(int j=0; j<inc[0].length;j++) {
+			for(int i=0; i<N; i++) {
+				concat[i][j]=inc[i][j];
+			}
+		}
+		for(int j=inc[0].length; j<M ; j++) {
+			for(int i=0; i<N ;i++) {
+				concat[i][j]=id[row][col];
+				row++;
+			}
+			row=0;
+			col++;
+		}
+		System.out.println("\n\nC|I: ");
+		for(int i=0; i<concat.length ; i++) {
+			System.out.println();
+			for(int j=0; j<concat[0].length ; j++) {
+				System.out.print(concat[i][j]+"   ");
+			}
+		}
+		//System.out.println(Arrays.deepToString(concat));
+
 	}
 	
 	//Getters

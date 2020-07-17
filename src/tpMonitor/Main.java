@@ -36,7 +36,9 @@ public class Main {
 		for(int i=0; i<N_TAREAS;i++) {
 			
 			hilito.add(new Thread(new Hilo(monitor, tareas[i]),"hilito "+i));
-			hilito.get(i).start();
+			//hilito.get(i).start();
 		}	
+		
+		
 	}
 }

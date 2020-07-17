@@ -91,6 +91,7 @@ public class RedDePetri {
 		boolean notFind = true;
 		ArrayList<Integer> regPivot = new ArrayList<Integer>();
 		
+		
 		for(int j=0; j<matrizIncidencia[0].length; j++) {
             for(int i=0; i<concat.length; i++) {
             	if(concat[i][j]!=0 && notFind) {
@@ -107,11 +108,8 @@ public class RedDePetri {
             		System.out.println("row ="+i+"  col= "+j+" valor = "+concat[i][j]+"  en for k: ");
             		for(int k=0;k<concat[0].length;k++) {
             			concat[i][k]=concat[i][k]+factor*(concat[pivot][k]);
-            		}
-            		
-            		
+            		}	
             	}
-            	
             }
             for(int k=0;k<concat[0].length;k++) {
     			concat[pivot][k]=0;
@@ -120,11 +118,28 @@ public class RedDePetri {
             notFind = true;
 		}
 		
+		int M = matrizIncidencia.length;
+		int row=0;
+		for(int pivote :regPivot) {
+			System.out.println(pivote);
+		}
+		int[][] pinvariants = new int[M-regPivot.size()][M];
+		for(int i=0;i<concat.length;i++) {
+			
+			for(int j=matrizIncidencia[0].length;j<concat[0].length;j++) {
+				if(!regPivot.contains(i)) {
+					System.out.println("i="+row+" j="+(j-matrizIncidencia[0].length));
+					pinvariants[row][(j-matrizIncidencia[0].length)] = concat[i][j];
+				}
+			}
+			if(!regPivot.contains(i)) {row++;}
+		}
+		printMatrix(pinvariants);
 		
 	}
 	public void  printMatrix(int[][] concat) {
 		System.out.println("\n\n--------------------------------------------");
-		System.out.println("Mi ");
+		System.out.println("Mi");
 		for(int i=0; i<concat.length ; i++) {
 			System.out.println();
 			for(int j=0; j<concat[0].length ; j++) {

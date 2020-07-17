@@ -1,5 +1,6 @@
 package tpMonitor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RedDePetri {
@@ -17,7 +18,7 @@ public class RedDePetri {
 		marcaInicial = act;
 		marcaActual = act;
 		//getidentityMatrix(inc.length);
-		concatMatrix(inc,getidentityMatrix(inc.length));
+		farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)));
 	}	
 	
 	public void changeCurrent(int[] newCurrent) {
@@ -85,10 +86,52 @@ public class RedDePetri {
 			}
 		}
 	}
-	private void farkasAlgorithm() {
+	private void farkasAlgorithm(int [][]concat) {
+		int pivot = 0, pivotNum = 0, factor = 0;
+		boolean notFind = true;
+		ArrayList<Integer> regPivot = new ArrayList<Integer>();
+		
 		for(int j=0; j<matrizIncidencia[0].length; j++) {
-
+            for(int i=0; i<concat.length; i++) {
+            	if(concat[i][j]!=0 && notFind) {
+            	  pivot = i;
+            	  pivotNum = concat[i][j];
+            	  notFind=false;
+            	  regPivot.add(pivot);
+            	  System.out.println("\npivot in row = "+pivot+" col="+j+" value = "+pivotNum);
+            	}
+            	
+            	if(concat[i][j]!=0 && notFind==false && i != pivot ) {
+            		factor = (concat[i][j] == pivotNum)? -1: 1;
+            		System.out.println("\nfactor = "+factor);
+            		System.out.println("row ="+i+"  col= "+j+" valor = "+concat[i][j]+"  en for k: ");
+            		for(int k=0;k<concat[0].length;k++) {
+            			concat[i][k]=concat[i][k]+factor*(concat[pivot][k]);
+            		}
+            		
+            		
+            	}
+            	
+            }
+            for(int k=0;k<concat[0].length;k++) {
+    			concat[pivot][k]=0;
+    		}
+    		printMatrix(concat);
+            notFind = true;
 		}
+		
+		
+	}
+	public void  printMatrix(int[][] concat) {
+		System.out.println("\n\n--------------------------------------------");
+		System.out.println("Mi ");
+		for(int i=0; i<concat.length ; i++) {
+			System.out.println();
+			for(int j=0; j<concat[0].length ; j++) {
+				System.out.print(concat[i][j]+"   ");
+			}
+		}
+		System.out.println("\n--------------------------------------------\n");
 	}
 	public int[][] getidentityMatrix(int N) {
 		int [][] identity = new int[N][N];
@@ -106,7 +149,7 @@ public class RedDePetri {
 		}
 		return identity;
 	}
-	public void concatMatrix(int[][] inc, int[][] id) {
+	public int[][] concatMatrix(int[][] inc, int[][] id) {
 		
 	    int N = inc.length;
 		int M = inc[0].length + id[0].length;
@@ -133,6 +176,7 @@ public class RedDePetri {
 			}
 		}
 		//System.out.println(Arrays.deepToString(concat));
+		return concat;
 
 	}
 	

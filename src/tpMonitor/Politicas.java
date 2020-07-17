@@ -6,10 +6,11 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 public final class Politicas {
 
-	private TreeMap<Integer,Integer> contador;
+	private static TreeMap<Integer,Integer> contador;
 	
-	public Politicas() {
+	public Politicas(int cantidad) {
 		contador = new TreeMap<Integer,Integer>(); 
+		inicializar(cantidad);
 	}
 	
 //	public void decidir(Hilo hilito, Queue<Hilo> espera) {
@@ -34,7 +35,7 @@ public final class Politicas {
 //				
 //	}
 	
-	public Boolean decidirYo(Hilo hilito) {
+	public static Boolean decidirYo(Hilo hilito) {
 		
 		if (contador.get(hilito.getID()) <= contador.get(hilito.getIDR())) {
 			// Me toca a mi, me despierto y termino busqueda del hilo a despertar
@@ -47,7 +48,7 @@ public final class Politicas {
 		return false;
 	}
 	
-	public Boolean decidirRival(Hilo hilito, Queue<Hilo> espera) {
+	public static Boolean decidirRival(Hilo hilito, Queue<Hilo> espera) {
 		
 		for (Hilo hilito2 : espera) {
 			if (hilito.getIDR() == hilito2.getID()) {
@@ -64,7 +65,7 @@ public final class Politicas {
 		return false;
 	}
 	
-	public void aumentar(Hilo hilito) {
+	public static void aumentar(Hilo hilito) {
 		//Log.spit("Voy: "+contador.get(hilito.getID())+" y el otro va: "+ contador.get(hilito.getIDR()));
 		contador.replace(hilito.getID(), contador.get(hilito.getID()),
 				contador.get(hilito.getID()) + 1);
@@ -75,7 +76,7 @@ public final class Politicas {
 //		contador.put(ID, 0);
 //	}
 	
-	public void inicializar(int cantidad) {
+	private void inicializar(int cantidad) {
 		for( int i = 0; i < cantidad; i++ ) {
 			contador.put( i, 0 );
 		}

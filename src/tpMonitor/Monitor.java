@@ -16,9 +16,9 @@ public final class Monitor {
 	private Semaphore entrada;
 	private Semaphore mutex;
 	
-	private Politicas politica;
+//	private Politicas politica;
 	
-	public Monitor(int max, RedDePetri red, Politicas politica) {
+	public Monitor(int max, RedDePetri red/*, Politicas politica*/) {
 		rdp = red;
 //		entrada = new ConcurrentLinkedDeque<Hilo>();
 		espera = new ConcurrentLinkedDeque<Hilo>();
@@ -27,7 +27,7 @@ public final class Monitor {
 		entrada = new Semaphore(1,true);
 		mutex = new Semaphore(1,true);
 		
-		this.politica = politica;
+//		this.politica = politica;
 	}
 	
 	public void enter(Hilo hilo) throws InterruptedException{
@@ -45,10 +45,10 @@ public final class Monitor {
 	
 	private void execute(Hilo hilo) throws InterruptedException {
 //		if (rdp.disparar(hilo)) {
-		if ( rdp.verificarCompatibilidad(hilo.getTarea()) && 
-				( !hilo.getPolitico() || (hilo.getPolitico() && politica.decidirYo(hilo)))) {
+		if ( rdp.verificarCompatibilidad(hilo.getTarea(),hilo) /*&& 
+				( !hilo.getPolitico() || (hilo.getPolitico() && politica.decidirYo(hilo)))*/) {
 			rdp.disparar(hilo);
-			politica.aumentar(hilo);
+//			Politicas.aumentar(hilo);
 			Log.spit("ES COMPATIBLE");
 			mutex.release();
 			espera();
@@ -65,42 +65,45 @@ public final class Monitor {
 		}
 	}
 	
-	private void espera() throws InterruptedException {
+	private void espera(){
 		boolean encontrado = false;
 		for(Hilo hilito: espera) {
-			if( rdp.verificarCompatibilidad(hilito.getTarea())) {
-				if( !hilito.getPolitico() ) {
+			if( rdp.verificarCompatibilidad(hilito.getTarea(),hilito)) {
+//				if( !hilito.getPolitico() ) {
 					Log.spit("NO HAY POLITICA, DESPIERTO AL hilito" + hilito.getID());
 					desEncolar(hilito);
 					encontrado = true;
 					break;
-					}
-				else {
-					Log.spit("HAY POLITICA, DECIDO POR hilito" + hilito.getID());
-					//politica.decidir( hilito, espera );
-					if (politica.decidirYo(hilito)) {
-						Log.spit("LE TOCA AL hilito" + hilito.getID());
-						desEncolar(hilito);
-						encontrado = true;
-						break;
-					}
-					else if(politica.decidirRival(hilito, espera)){
-						for(Hilo hilito2: espera) {
-							if (hilito.getIDR() == hilito2.getID()) {
-								Log.spit("LE TOCA AL hilito" + hilito2.getID());
-								desEncolar(hilito2);
-								encontrado = true;
-								break;
-							}
+//					}
+//				else {
+//					Log.spit("HAY POLITICA, DECIDO POR hilito" + hilito.getID());
+//					//politica.decidir( hilito, espera );
+//					if (Politicas.decidirYo(hilito)) {
+//						Log.spit("LE TOCA AL hilito" + hilito.getID());
+//						desEncolar(hilito);
+//						encontrado = true;
+//						break;
+//					}
+				} 
+			else if (Politicas.decidirRival(hilito, espera)) {
+				for (Hilo hilito2 : espera) {
+					if (hilito.getIDR() == hilito2.getID()) {
+						if (rdp.verificarCompatibilidad(hilito2.getTarea())) {
+							Log.spit("LE TOCA AL hilito" + hilito2.getID());
+							desEncolar(hilito2);
+							encontrado = true;
+							break;
 						}
-						break;
-						}
-					else {
-						Log.spit("LE TOCA AL OTRO HILO PERO NO ESTA");
 					}
 				}
+			//	break;
+				} 
+//			else {
+//					Log.spit("LE TOCA AL OTRO HILO PERO NO ESTA");
+//				}
 			}
-		}
+//			}
+//		}
 			
 		if(!encontrado) {
 		Log.spit("NO HAY HILITOS PARA DESPERTAR");

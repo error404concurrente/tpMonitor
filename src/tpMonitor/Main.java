@@ -17,18 +17,21 @@ public class Main {
 		//Creacion de RpP
 		RedDePetri rdp = new RedDePetri(inc, transitions, marking);
 		
-		//Creacion de Politica
-		Politicas politica = new Politicas();
+//		//Creacion de Politica
+//		Politicas politica = new Politicas();
 		
 		//Creacion de Monitor
-		Monitor monitor = new Monitor(cantHilos, rdp, politica);
+		Monitor monitor = new Monitor(cantHilos, rdp/*, politica*/);
 		
 		
 
 		//Creacion hilo
        
 		final int N_TAREAS = 6;
-		politica.inicializar(N_TAREAS);
+//		politica.inicializar(N_TAREAS);
+		//Creacion de Politica
+		Politicas politica = new Politicas(N_TAREAS);
+				
 		int [][] tareas = {{1,0,0,0,0,0},{0,1,0,0,0,0},{0,0,1,0,0,0},{0,0,0,1,0,0},{0,0,0,0,1,0},{0,0,0,0,0,1}};
 		ArrayList <Thread> hilito = new ArrayList<Thread>();
 		

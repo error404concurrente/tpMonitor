@@ -22,7 +22,7 @@ public class RedDePetri {
 	
 	public boolean disparar(Hilo hilo) {
 		Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
-		if(verificarCompatibilidad(hilo.getTarea())) {
+//		if(verificarCompatibilidad(hilo.getTarea(),hilo)) {
 			Log.spit("Compatibilidad Confirmada");
 //			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 			Log.spit("-------------- Resultados --------------");
@@ -31,11 +31,26 @@ public class RedDePetri {
 			calcularVectorSensible();
 			Log.spit("Estado de RdP Despues: "+strMarcaActual()+"  ----  T. Sensibles Despues: "+strTranSensible());
 			Log.spit("-------------- Fin Resultados --------------");
+			Politicas.aumentar(hilo);
 			return true;
-		}else {
-			Log.spit("Compatibilidad Denegada");
-			return false;
+//		}else {
+//			Log.spit("Compatibilidad Denegada");
+//			return false;
+//		}
+	}
+	
+	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo){
+		//Ej: verificarCompatibilidad(hilo.getTarea())
+		for(int i = 0; i < tranSensibilizadas.length; i++) {
+			if(tranSensibilizadas[i]==1 && tarea[i]==1){
+				if(( !hilo.getPolitico() || (hilo.getPolitico() && Politicas.decidirYo(hilo)))) {
+				Log.spit("RDP - Transicion detectada: T"+i);
+				return true;
+				}
+			}
 		}
+		Log.spit("Compatibilidad Denegada");
+		return false;
 	}
 	
 	public boolean verificarCompatibilidad(int[] tarea){

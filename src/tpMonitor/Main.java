@@ -22,7 +22,6 @@ public class Main {
 		
 		long[] alfa = {0,0,500,800,0,0};
 		long[] beta = {0xfffffff,0xfffffff,0xfffffff,0xfffffff,0xfffffff,0xfffffff};
-		System.out.println(" "+beta[3]);
 
 		//Creacion de RpP
 		RedDePetri rdp = new RedDePetri(inc, transitions, marking, alfa, beta);

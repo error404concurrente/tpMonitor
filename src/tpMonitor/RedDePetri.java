@@ -132,20 +132,22 @@ public class RedDePetri {
 	}
 		
 	private void mimeador(Hilo hilo) throws InterruptedException {
-		for (int i = 0; i < alfa.length; i++) {
-			if (tranSensibilizadas[i] == 1) {
-				long t = alfa[i] - (System.currentTimeMillis() - transTimestamp[i]);
+		int[] aux = hilo.getTarea();
+		for (int i = 0; i < aux.length; i++) {
+			if (aux[i] == 1) {
+				long tSensible = System.currentTimeMillis() - transTimestamp[i];
+				long t = alfa[i] - tSensible;
 				if (t > 0) {
 					Log.spit("MIMIENDO");
 					Log.spit("t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   " + transTimestamp[i]);
 					Thread.sleep(t);
 					break;
-				}else if(t<0 && beta[i] > (System.currentTimeMillis() - transTimestamp[i])) {
+				}else if( t<=0 && beta[i] >= tSensible) {
 					Log.spit("NO MIMIENDO: t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   "+ transTimestamp[i]);
 					break;
-				}else if(beta[i] < (System.currentTimeMillis() - transTimestamp[i])){
+				}else if( t<=0 && beta[i] < tSensible ){
 					Log.spit(beta[i]+" ");
-					Log.spit("Error de Beta: "+(System.currentTimeMillis() - transTimestamp[i]));
+					Log.spit("Error de Beta: "+tSensible+">beta");
 					break;
 				}
 			}

@@ -1,6 +1,5 @@
 package tpMonitor;
 
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -20,9 +19,13 @@ public class Main {
 		int[] marking = {1,0,0,0,0};
 		int[] transitions = {1,1,0,0,0,0};
 		final int cantHilos = 99;
+		
+		long[] alfa = {0,0,500,800,0,0};
+		long[] beta = {0xfffffff,0xfffffff,0xfffffff,0xfffffff,0xfffffff,0xfffffff};
+		System.out.println(" "+beta[3]);
 
 		//Creacion de RpP
-		RedDePetri rdp = new RedDePetri(inc, transitions, marking);
+		RedDePetri rdp = new RedDePetri(inc, transitions, marking, alfa, beta);
 
 
 		//Creacion de Monitor
@@ -48,12 +51,15 @@ public class Main {
 		hilito.add(new Thread(new Hilo(monitor, tareas[1], true, 1, 0),"hilito "+1));
 		//politica.setContador(1);
 		hilito.get(1).start();
-
-		for(int i=2; i<N_TAREAS;i++) {
-			hilito.add(new Thread(new Hilo(monitor, tareas[i], false, i, i),"hilito "+i));
-			hilito.get(i).start();
+		
+		hilito.add(new Thread(new Hilo(monitor, tareas[2], false, 2, 2 ),"hilito "+2));
+		hilito.get(2).start();
+		hilito.add(new Thread(new Hilo(monitor, tareas[3], false, 3, 3 ),"hilito "+3));
+		hilito.get(3).start();
+		
+		for(int i=4; i<N_TAREAS;i++) {
+				hilito.add(new Thread(new Hilo(monitor, tareas[i], false, i, i),"hilito "+i));
+				hilito.get(i).start();
 		}
-
-
 	}
 }

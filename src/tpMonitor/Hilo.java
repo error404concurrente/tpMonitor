@@ -9,7 +9,6 @@ public class Hilo implements Runnable{
 	private int ID;
 	private int IDR;
 	
-	
 	public Hilo(Monitor monitor, int[] tarea, boolean politico, int ID, int IDR){
 		this.monitor = monitor;
 		this.tarea = tarea;

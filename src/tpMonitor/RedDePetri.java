@@ -7,17 +7,26 @@ public class RedDePetri {
 
 	private int [][] matrizIncidencia;
 	private int [] tranSensibilizadas;
+	private long [] transTimestamp;
 	private int [] marcaInicial;
 	private int [] marcaActual;
+	private long [] alfa;
+	private long [] beta;
 
 
-
-	public RedDePetri(int[][] inc, int[] trans, int[] act) {
+	public RedDePetri(int[][] inc, int[] trans, int[] act, long [] alfa, long [] beta) {
 		matrizIncidencia= inc;
 		tranSensibilizadas = trans;
 		marcaInicial = act;
 		marcaActual = act;
-
+		this.alfa = alfa;
+		this.beta = beta;
+		
+		transTimestamp = new long[tranSensibilizadas.length];
+		for (int i = 0; i < transTimestamp .length; i++) {
+			transTimestamp[i]=System.currentTimeMillis();
+		}
+		
 		Log.spit("P-invariantes");
 		farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
 
@@ -30,19 +39,20 @@ public class RedDePetri {
 		marcaActual = newCurrent;
 	}
 
-	public boolean disparar(Hilo hilo) {
-		Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+	public boolean disparar(Hilo hilo) throws InterruptedException {
+		Log.spit("Hilo entrante: " + Thread.currentThread().getName() + "  Disparo: " + hilo.strTarea());
 //		if(verificarCompatibilidad(hilo.getTarea(),hilo)) {
-			Log.spit("Compatibilidad Confirmada");
+		Log.spit("Compatibilidad Confirmada");
 //			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
-			Log.spit("-------------- Resultados de Disparo --------------");
-			Log.spit("Estado de RdP Antes:   "+strMarcaActual()+"  ----  T. Sensibles Antes:   "+strTranSensible());
-			calcularMarcaActual(hilo.getTarea());
-			calcularVectorSensible();
-			Log.spit("Estado de RdP Despues: "+strMarcaActual()+"  ----  T. Sensibles Despues: "+strTranSensible());
-			Log.spit("-------------- Fin Resultados --------------");
-			Politicas.aumentar(hilo);
-			return true;
+		Log.spit("-------------- Resultados de Disparo --------------");
+		Log.spit("Estado de RdP Antes:   " + strMarcaActual() + "  ----  T. Sensibles Antes:   " + strTranSensible());
+		calcularMarcaActual(hilo.getTarea());
+		mimeador(hilo);
+		calcularVectorSensible();
+		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
+		Log.spit("-------------- Fin Resultados --------------");
+		Politicas.aumentar(hilo);
+		return true;
 //		}else {
 //			Log.spit("Compatibilidad Denegada");
 //			return false;
@@ -88,7 +98,11 @@ public class RedDePetri {
 
 	private void calcularVectorSensible(){
 		int[] s = new int[matrizIncidencia[0].length];  //vector auxiliar S
-
+		int[] aux = new int[tranSensibilizadas.length];
+		for (int i = 0; i < aux.length; i++) {
+			aux[i]=tranSensibilizadas[i];
+		}
+		
 		for (int i = 0; i < matrizIncidencia[0].length; i++) { //Recorrer columnas
 			for (int j = 0; j < matrizIncidencia.length; j++) { //Recorrer filas
 				s[j] = marcaActual[j] + matrizIncidencia[j][i];	//Calculo de S
@@ -97,7 +111,9 @@ public class RedDePetri {
 			 * En la posicion i va a ser 1 si no hay valores negativos en S,
 			 * de otra forma será 0
 			 */
+			
 			tranSensibilizadas[i]=1;
+//			transTimestamp[i]=System.currentTimeMillis();
 			for (int x = 0; x < s.length; x++) {
 				if(s[x]<0){
 					tranSensibilizadas[i]=0;
@@ -105,8 +121,37 @@ public class RedDePetri {
 				}
 			}
 		}
+		
+		for (int i = 0; i < tranSensibilizadas.length; i++) {
+			if(aux[i]==0 && tranSensibilizadas[i]==1) {
+				transTimestamp[i]=System.currentTimeMillis();
+			}else if(aux[i]==1 && tranSensibilizadas[i]==0){
+				transTimestamp[i]=0;
+			}
+		}
 	}
-
+		
+	private void mimeador(Hilo hilo) throws InterruptedException {
+		for (int i = 0; i < alfa.length; i++) {
+			if (tranSensibilizadas[i] == 1) {
+				long t = alfa[i] - (System.currentTimeMillis() - transTimestamp[i]);
+				if (t > 0) {
+					Log.spit("MIMIENDO");
+					Log.spit("t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   " + transTimestamp[i]);
+					Thread.sleep(t);
+					break;
+				}else if(t<0 && beta[i] > (System.currentTimeMillis() - transTimestamp[i])) {
+					Log.spit("NO MIMIENDO: t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   "+ transTimestamp[i]);
+					break;
+				}else if(beta[i] < (System.currentTimeMillis() - transTimestamp[i])){
+					Log.spit(beta[i]+" ");
+					Log.spit("Error de Beta: "+(System.currentTimeMillis() - transTimestamp[i]));
+					break;
+				}
+			}
+		}
+	}
+	
 	private void farkasAlgorithm(int[][] concat, int rowInc, int colInc) {
 
 		ArrayList<Integer> regPivot = new ArrayList<Integer>();

@@ -17,8 +17,8 @@ public class RedDePetri {
 		tranSensibilizadas = trans;
 		marcaInicial = act;
 		marcaActual = act;
-		//getidentityMatrix(inc.length);
-		farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)));
+		int [][] mT =getTranspuesta(inc);
+		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}	
 	
 	public void changeCurrent(int[] newCurrent) {
@@ -86,13 +86,13 @@ public class RedDePetri {
 			}
 		}
 	}
-	private void farkasAlgorithm(int [][]concat) {
+	private void farkasAlgorithm(int [][]concat,int rowInc, int colInc) {
 		int pivot = 0, pivotNum = 0, factor = 0;
 		boolean notFind = true;
 		ArrayList<Integer> regPivot = new ArrayList<Integer>();
 		
 		
-		for(int j=0; j<matrizIncidencia[0].length; j++) {
+		for(int j=0; j<colInc; j++) {
             for(int i=0; i<concat.length; i++) {
             	if(concat[i][j]!=0 && notFind) {
             	  pivot = i;
@@ -118,18 +118,18 @@ public class RedDePetri {
             notFind = true;
 		}
 		
-		int M = matrizIncidencia.length;
+		//int M = matrizIncidencia.length;
 		int row=0;
 		for(int pivote :regPivot) {
 			System.out.println(pivote);
 		}
-		int[][] pinvariants = new int[M-regPivot.size()][M];
+		int[][] pinvariants = new int[rowInc-regPivot.size()][rowInc];
 		for(int i=0;i<concat.length;i++) {
 			
-			for(int j=matrizIncidencia[0].length;j<concat[0].length;j++) {
+			for(int j=colInc;j<concat[0].length;j++) {
 				if(!regPivot.contains(i)) {
-					System.out.println("i="+row+" j="+(j-matrizIncidencia[0].length));
-					pinvariants[row][(j-matrizIncidencia[0].length)] = concat[i][j];
+					System.out.println("i="+row+" j="+(j-colInc));
+					pinvariants[row][(j-colInc)] = concat[i][j];
 				}
 			}
 			if(!regPivot.contains(i)) {row++;}
@@ -193,6 +193,18 @@ public class RedDePetri {
 		//System.out.println(Arrays.deepToString(concat));
 		return concat;
 
+	}
+	
+	public int[][] getTranspuesta(int[][] matrix) {
+		int[][] mT = new int[matrix[0].length][matrix.length];
+		for (int i=0; i < matrix.length; i++) {
+			  for (int j=0; j < matrix[i].length; j++) {
+			    mT[j][i] = matrix[i][j];
+			  }
+			}
+		printMatrix(matrix);
+		printMatrix(mT);
+		return mT;
 	}
 	
 	//Getters

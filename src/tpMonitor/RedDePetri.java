@@ -138,9 +138,6 @@ public class RedDePetri {
 		Log.spit(printMatrix(invariants));
 	}
 	
-	
-
-	
 	public int[][] getidentityMatrix(int N) {
 		int[][] identity = new int[N][N];
 		for (int i = 0; i < N; i++) {

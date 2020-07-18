@@ -128,7 +128,7 @@ public class RedDePetri {
 			}else if(aux[i]==1 && tranSensibilizadas[i]==0){
 				transTimestamp[i]=0;
 			}
-		}
+		}	
 	}
 		
 	private void mimeador(Hilo hilo) throws InterruptedException {

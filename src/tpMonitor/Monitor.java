@@ -63,10 +63,7 @@ public final class Monitor {
 				espera.remove(hilito);
 				Log.spit("************ Fin Verificacion Cola de Espera ************");
 				synchronized (hilito) {
-					Log.spit("------------EN NOTIFY()--------------");
-					Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
 					hilito.notify();
-					Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
 				}
 				encontrado = true;
 				break;
@@ -79,22 +76,12 @@ public final class Monitor {
 		}
 	}
 	
-//	private void despertarEspera(Hilo hilo) throws InterruptedException {
-//		execute(hilo);
-//	}
-	
-	private void encolar(Queue <Hilo> cola, Hilo hilo) throws InterruptedException {
-		Log.spit("Monitor: Entra el hilo " + Thread.currentThread().getName()+" a la Cola de Espera");
+	private void encolar(Queue<Hilo> cola, Hilo hilo) throws InterruptedException {
+		Log.spit("Monitor: Entra el hilo " + Thread.currentThread().getName() + " a la Cola de Espera");
 		cola.add(hilo);
-		synchronized(hilo){
-	    Log.spit("------------EN WAIT()--------------");
-	    Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
-		hilo.wait();
-		Log.spit("Hilo" + Thread.currentThread().getName()+" estado: "+ Thread.currentThread().getState());
+		synchronized (hilo) {
+			hilo.wait();
 		}
 	}
-	
-//	private void desEncolar(Queue <Hilo> cola){
-//		cola.poll().notify();
-//	}
+
 }

@@ -31,21 +31,50 @@ public class RedDePetri {
 	}
 	
 	public boolean disparar(Hilo hilo) {
+<<<<<<< HEAD
 		Log.spit("RdP: Analizando compatibilidad de "+Thread.currentThread().getName()+"  Disparo: {"+hilo.strTarea()+"}");
 		if(verificarCompatibilidad(hilo.getTarea())) {
 			Log.spit("RdP: Compatibilidad Confirmada a "+Thread.currentThread().getName());
+=======
+		Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+//		if(verificarCompatibilidad(hilo.getTarea(),hilo)) {
+			Log.spit("Compatibilidad Confirmada");
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 //			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 			Log.spit("-------------- Resultados de Disparo --------------");
 			Log.spit("Estado de RdP Antes:   "+strMarcaActual()+"  ----  T. Sensibles Antes:   "+strTranSensible());
 			calcularMarcaActual(hilo.getTarea());
 			calcularVectorSensible();
 			Log.spit("Estado de RdP Despues: "+strMarcaActual()+"  ----  T. Sensibles Despues: "+strTranSensible());
+<<<<<<< HEAD
 			Log.spit("------------------ Fin Resultados -----------------");
 			return true;
 		}else {
 			Log.spit("RdP: Compatibilidad Denegada a "+Thread.currentThread().getName());
 			return false;
+=======
+			Log.spit("-------------- Fin Resultados --------------");
+			Politicas.aumentar(hilo);
+			return true;
+//		}else {
+//			Log.spit("Compatibilidad Denegada");
+//			return false;
+//		}
+	}
+	
+	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo){
+		//Ej: verificarCompatibilidad(hilo.getTarea())
+		for(int i = 0; i < tranSensibilizadas.length; i++) {
+			if(tranSensibilizadas[i]==1 && tarea[i]==1){
+				if(( !hilo.getPolitico() || (hilo.getPolitico() && Politicas.decidirYo(hilo)))) {
+				Log.spit("RDP - Transicion detectada: T"+i);
+				return true;
+				}
+			}
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 		}
+		Log.spit("Compatibilidad Denegada");
+		return false;
 	}
 	
 	public boolean verificarCompatibilidad(int[] tarea){

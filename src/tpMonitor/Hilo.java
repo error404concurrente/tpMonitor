@@ -5,18 +5,27 @@ import java.util.ArrayList;
 public class Hilo implements Runnable{
 	int[] tarea;
 	Monitor monitor;
+	private boolean politico;
+	private int ID;
+	private int IDR;
 	
-	public Hilo(Monitor monitor, int[] tarea){
+	
+	public Hilo(Monitor monitor, int[] tarea, boolean politico, int ID, int IDR){
 		this.monitor = monitor;
 		this.tarea = tarea;
+		this.politico = politico;
+		this.ID = ID;
+		this.IDR = IDR;
 	}
 	
 	public void run(){
-		try {
-			monitor.enter(this);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (int i = 0; i < 3; i++) {
+			try {
+				monitor.enter(this);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -31,6 +40,18 @@ public class Hilo implements Runnable{
 	
 	public int[] getTarea() {
 		return tarea;
+	}
+	
+	public boolean getPolitico() {
+		return politico;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public int getIDR() {
+		return IDR;
 	}
 	
 }

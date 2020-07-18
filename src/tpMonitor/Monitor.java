@@ -6,19 +6,32 @@ import java.util.concurrent.Semaphore;
 
 public final class Monitor {
 	private RedDePetri rdp;
+<<<<<<< HEAD
 	private Queue<Hilo> espera;
 	
 	private int size;
 	
+=======
+	private Cola colaEspera;
+	private int size;
+	
+
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 	private Semaphore entrada;
 	private Semaphore mutex;
+
 	
 	public Monitor(int max, RedDePetri red) {
 		rdp = red;
+<<<<<<< HEAD
 		espera = new ConcurrentLinkedDeque<Hilo>();
+=======
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 		size = max;
 		entrada = new Semaphore(1,true);
-		mutex = new Semaphore(1,true);	
+		mutex = new Semaphore(1,true);
+		
+		colaEspera = new Cola(rdp,entrada);
 	}
 	
 	public void enter(Hilo hilo) throws InterruptedException{
@@ -33,25 +46,39 @@ public final class Monitor {
 	}
 	
 	private void execute(Hilo hilo) throws InterruptedException {
+<<<<<<< HEAD
 		if (rdp.disparar(hilo)) {
 			//Se disparo correctamente la transicion
 			Log.spit("Monitor: Confirmacion de Disparo recibida - Se procede a revisar los hilos en la cola de espera");
+=======
+		
+		if ( rdp.verificarCompatibilidad(hilo.getTarea(),hilo) ) {
+			rdp.disparar(hilo);
+			Log.spit("ES COMPATIBLE");
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 			mutex.release();
-			espera();
+			colaEspera.buscarEspera();
 		} else {
 			//No se disparo la transicion
 			Log.spit("Monitor: Denegacion de Disparo confirmada - Se procede a mandar "+Thread.currentThread().getName()+" a la cola de espera");
 			
 			mutex.release();
 			entrada.release();
+<<<<<<< HEAD
 			// espera(); //En caso que pregunten antes de irse a dormir
 			encolar(espera, hilo);
 			Log.spit("Monitor: Sale el hilo " + Thread.currentThread().getName()+" de Cola de Espera y esta listo para disparar");
+=======
+			//colaEspera.espera(); //En caso que pregunten antes de irse a dormir
+			colaEspera.encolar(hilo);
+			Log.spit("ME VOY A EJECUTAR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 			mutex.acquire();
 			execute(hilo);
 
 		}
 	}
+<<<<<<< HEAD
 
 	private void espera() throws InterruptedException {
 		Log.spit("************** Verificacion Cola de Espera **************");
@@ -84,4 +111,7 @@ public final class Monitor {
 		}
 	}
 
+=======
+	
+>>>>>>> 17541e27aa5a0455b0b9875729b83f2e52515390
 }

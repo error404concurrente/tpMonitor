@@ -31,7 +31,7 @@ public class RedDePetri {
 		farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
 
 		Log.spit("T-invariantes");
-		int [][] mT =getTranspuesta(inc);
+		int [][] mT = getTranspuesta(inc);
 		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
@@ -39,24 +39,19 @@ public class RedDePetri {
 		marcaActual = newCurrent;
 	}
 
-	public boolean disparar(Hilo hilo) throws InterruptedException {
-		Log.spit("Hilo entrante: " + Thread.currentThread().getName() + "  Disparo: " + hilo.strTarea());
-//		if(verificarCompatibilidad(hilo.getTarea(),hilo)) {
-		Log.spit("Compatibilidad Confirmada");
-//			Log.spit("Hilo entrante: "+Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
-		Log.spit("-------------- Resultados de Disparo --------------");
-		Log.spit("Estado de RdP Antes:   " + strMarcaActual() + "  ----  T. Sensibles Antes:   " + strTranSensible());
+	public void disparar(Hilo hilo) throws InterruptedException {
+//		Log.spit("Hilo entrante: " + Thread.currentThread().getName() + "  Disparo: " + hilo.strTarea());
+//		Log.spit("Compatibilidad Confirmada");
+//		Log.spit("-------------- Resultados de Disparo --------------");
+//		Log.spit("Estado de RdP Antes:   " + strMarcaActual() + "  ----  T. Sensibles Antes:   " + strTranSensible());
 		calcularMarcaActual(hilo.getTarea());
 		mimeador(hilo);
 		calcularVectorSensible();
-		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
-		Log.spit("-------------- Fin Resultados --------------");
+//		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
+//		Log.spit("-------------- Fin Resultados --------------");
 		Politicas.aumentar(hilo);
-		return true;
-//		}else {
-//			Log.spit("Compatibilidad Denegada");
-//			return false;
-//		}
+		int [][] mT = getTranspuesta(matrizIncidencia);
+		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo){
@@ -64,12 +59,12 @@ public class RedDePetri {
 		for(int i = 0; i < tranSensibilizadas.length; i++) {
 			if(tranSensibilizadas[i]==1 && tarea[i]==1){
 				if(( !hilo.getPolitico() || (hilo.getPolitico() && Politicas.decidirYo(hilo)))) {
-				Log.spit("RDP - Transicion detectada: T"+i);
+//				Log.spit("RDP - Transicion detectada: T"+i);
 				return true;
 				}
 			}
 		}
-		Log.spit("Compatibilidad Denegada");
+//		Log.spit("Compatibilidad Denegada");
 		return false;
 	}
 
@@ -78,7 +73,7 @@ public class RedDePetri {
 		boolean compatible = false;
 		for(int i = 0; i < tranSensibilizadas.length; i++) {
 			if(tranSensibilizadas[i]==1 && tarea[i]==1){
-				Log.spit("RDP: Transicion compatible detectada: T"+i);
+//				Log.spit("RDP: Transicion compatible detectada: T"+i);
 				compatible = true;
 			}
 		}
@@ -138,16 +133,16 @@ public class RedDePetri {
 				long tSensible = System.currentTimeMillis() - transTimestamp[i];
 				long t = alfa[i] - tSensible;
 				if (t > 0) {
-					Log.spit("MIMIENDO");
-					Log.spit("t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   " + transTimestamp[i]);
+//					Log.spit("MIMIENDO");
+//					Log.spit("t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   " + transTimestamp[i]);
 					Thread.sleep(t);
 					break;
 				}else if( t<=0 && beta[i] >= tSensible) {
-					Log.spit("NO MIMIENDO: t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   "+ transTimestamp[i]);
+//					Log.spit("NO MIMIENDO: t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   "+ transTimestamp[i]);
 					break;
 				}else if( t<=0 && beta[i] < tSensible ){
 					Log.spit(beta[i]+" ");
-					Log.spit("Error de Beta: "+tSensible+">beta");
+//					Log.spit("Error de Beta: "+tSensible+">beta");
 					break;
 				}
 			}

@@ -27,7 +27,7 @@ public final class Monitor {
 	public void enter(Hilo hilo) throws InterruptedException{
 		// Obtencion de los semaforos
 		try {
-			Log.spit("Hilo entrante: "+Thread.currentThread().getName());
+//			Log.spit("Hilo entrante: "+Thread.currentThread().getName());
 			entrada.acquire();
 			
 			mutex.acquire();
@@ -36,22 +36,23 @@ public final class Monitor {
 			e.printStackTrace();
 		}
 		execute(hilo);
-		Log.spit("TERMINE ME VOY " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+		Log.spit("[Disparo Efectuado]: "+hilo.strTarea()+"  [Estado Actual]: "+rdp.strMarcaActual()+" [T.Sensibilizadas]: "+rdp.strTranSensible());
+//		Log.spit("TERMINE ME VOY " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 	}
 
 	private void execute(Hilo hilo) throws InterruptedException {
 		if ( rdp.verificarCompatibilidad(hilo.getTarea(),hilo) ) {
 			rdp.disparar(hilo);
-			Log.spit("ES COMPATIBLE");
+//			Log.spit("ES COMPATIBLE");
 			mutex.release();
 			colaEspera.buscarEspera();
 		} else {
-			Log.spit("NO ES COMPATIBLE-PA la espera");
+//			Log.spit("NO ES COMPATIBLE-PA la espera");
 			mutex.release();
 			entrada.release();
 			//colaEspera.espera(); //En caso que pregunten antes de irse a dormir
 			colaEspera.encolar(hilo);
-			Log.spit("ME VOY A EJECUTAR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+//			Log.spit("ME VOY A EJECUTAR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 			mutex.acquire();
 			execute(hilo);
 

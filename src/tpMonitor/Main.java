@@ -19,13 +19,15 @@ public class Main {
 						{ 0,  0,  1,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
 						{ 1  -1, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
 						{ 0,  0,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0,  0,  0,  1,  0,  0},
-						{ 0,  0,  0,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0,  0,  0,  8,  0},
+						{ 0,  0,  0,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0,  0,  0,  1,  0},
+//						{ 0,  0,  0,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0,  0,  0,  8,  0},
 						{ 0, -1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
 						{ 0,  0, -1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
 						{ 0,  0,  0,  0,  0,  0,  1,  0, -1, -1,  0,  0,  0,  0,  0,  0,  1},
 						{ 0,  0,  0,  0,  0,  1,  0,  1,  0,  0, -1, -1,  0,  0,  0,  0,  0},
 						{ 0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  0,  0, -1,  0,  0},
-						{ 0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  0,  0, -8,  0},
+						{ 0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  0,  0, -1,  0},
+//						{ 0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  0,  0, -8,  0},
 						{-1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
 						{ 0,  0,  0, -1,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,  0},
 						{ 0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0},
@@ -37,7 +39,7 @@ public class Main {
 		
 		
 		int[] marking = { 0,  0,  0,  8,  8,  4,  4,  0,  0,  0,  0,  1,  1,  1,  0};
-		int[] transitions = { 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
+		int[] tSensibility = { 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
 		
 		final int cantHilos = 99;
 		
@@ -45,7 +47,7 @@ public class Main {
 		long[] beta = {0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff};
 
 		//Creacion de RpP
-		RedDePetri rdp = new RedDePetri(inc, transitions, marking, alfa, beta);
+		RedDePetri rdp = new RedDePetri(inc, tSensibility, marking, alfa, beta);
 
 
 		//Creacion de Monitor
@@ -53,32 +55,36 @@ public class Main {
 
 
 
-		/**	Creacion de Hilos y tareas
+		/**	Creacion de Hilos y transiciones
 		 * Se entienden como tareas a las transiciones que el hilo quiere disparar
 		 */
+		int[][] transiciones = {{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+								{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}};
 
-		final int N_TAREAS = 6;
+		final int N_TRANS= transiciones.length;
 //		politica.inicializar(N_TAREAS);
 		//Creacion de Politica
-		Politicas politica = new Politicas(N_TAREAS);
-
-		int [][] tareas = {{1,0,0,0,0,0},{0,1,0,0,0,0},{0,0,1,0,0,0},{0,0,0,1,0,0},{0,0,0,0,1,0},{0,0,0,0,0,1}};
+		Politicas politica = new Politicas(N_TRANS);
+		
 		ArrayList <Thread> hilito = new ArrayList<Thread>();
-
-		hilito.add(new Thread(new Hilo(monitor, tareas[0], true, 0, 1),"hilito "+0));
-		//politica.setContador(0);
-		hilito.get(0).start();
-		hilito.add(new Thread(new Hilo(monitor, tareas[1], true, 1, 0),"hilito "+1));
-		//politica.setContador(1);
-		hilito.get(1).start();
 		
-		hilito.add(new Thread(new Hilo(monitor, tareas[2], false, 2, 2 ),"hilito "+2));
-		hilito.get(2).start();
-		hilito.add(new Thread(new Hilo(monitor, tareas[3], false, 3, 3 ),"hilito "+3));
-		hilito.get(3).start();
-		
-		for(int i=4; i<N_TAREAS;i++) {
-				hilito.add(new Thread(new Hilo(monitor, tareas[i], false, i, i),"hilito "+i));
+		for(int i=0; i<N_TRANS;i++) {
+				hilito.add(new Thread(new Hilo(monitor, transiciones[i], false, i, i),"hilito "+i));
 				hilito.get(i).start();
 		}
 	}

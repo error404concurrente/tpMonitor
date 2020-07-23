@@ -27,11 +27,41 @@ public class RedDePetri {
 			transTimestamp[i]=System.currentTimeMillis();
 		}
 		
-		Log.spit("P-invariantes");
-		farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
+		
+		int [][] identAux =getidentityMatrix(inc.length);		
+		System.out.println("Identidad N: "+identAux.length);
+		System.out.println("Identidad M: "+identAux[0].length);
+		printMatrix(identAux);
+		
+		System.out.println("Incidencia N: "+inc.length);
+		System.out.println("Incidencia M: "+inc[0].length);
+		printMatrix(inc);
+		int [][] concat = concatMatrix(inc,getidentityMatrix(inc.length));
+		
+		System.out.println("Concat N: "+concat.length);
+		System.out.println("Concat M: "+concat[0].length);
+		printMatrix(concat);
+		
+		
+		farkasAlgorithm(concat,inc.length,inc[0].length);
 
-		Log.spit("T-invariantes");
+		//Log.spit("T-invariantes");
 		int [][] mT = getTranspuesta(inc);
+		
+//		int [][] identAux =getidentityMatrix(mT.length);		
+//		System.out.println("Identidad N: "+identAux.length);
+//		System.out.println("Identidad M: "+identAux[0].length);
+//		printMatrix(identAux);
+//		
+//		System.out.println("Incidencia N: "+mT.length);
+//		System.out.println("Incidencia M: "+mT[0].length);
+//		printMatrix(inc);
+//		int [][] concat = concatMatrix(mT,getidentityMatrix(mT.length));
+//		
+//		System.out.println("Concat N: "+concat.length);
+//		System.out.println("Concat M: "+concat[0].length);
+//		printMatrix(concat);
+		System.out.println("TRANSPUESTA");
 		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
@@ -150,49 +180,71 @@ public class RedDePetri {
 	}
 	
 	private void farkasAlgorithm(int[][] concat, int rowInc, int colInc) {
-
-		ArrayList<Integer> regPivot = new ArrayList<Integer>();
-		int pivot = 0, pivotNum = 0, factor = 0;
-		boolean notFind = true;
-
-		// Operaciones elementales para encontrar invariantes
-		for (int j = 0; j < colInc; j++) {
-			for (int i = 0; i < concat.length; i++) {
-
-				if (concat[i][j] != 0 && notFind) {
-					pivot    = i;
-					pivotNum = concat[i][j];
-					notFind  = false;
-					regPivot.add(pivot);
-				}
-				if (concat[i][j] != 0 && notFind == false && i != pivot) {
-					factor = (concat[i][j] == pivotNum) ? -1 : 1;
-					for (int k = 0; k < concat[0].length; k++) {
-						concat[i][k] = concat[i][k] + factor * (concat[pivot][k]);
-					}
-				}
-			}
-			for (int k = 0; k < concat[0].length; k++) {
-				concat[pivot][k] = 0;
-			}
-			notFind = true;
+		ArrayList<int[]> m = new ArrayList<>();
+		for(int i=0; i<concat.length;i++) {
+			m.add(concat[i]);
+		}
+		System.out.println("***************************************");
+		for(int j=0; j<concat[0].length;j++) {
+			//int [] aux =
+			System.out.println(m.get(0)[j]);
 		}
 
-		// Se extraen las filas y columnas sin importancia
-		int row = 0;
-		int[][] invariants = new int[rowInc - regPivot.size()][rowInc];
-		for (int i = 0; i < concat.length; i++) {
-			for (int j = colInc; j < concat[0].length; j++) {
-				if (!regPivot.contains(i)) {
-					invariants[row][(j - colInc)] = concat[i][j];
-				}
-			}
-			if (!regPivot.contains(i)) {
-				row++;
-			}
-		}
-		//printMatrix(invariants);
-		Log.spit(printMatrix(invariants));
+//		ArrayList<Integer> regPivot = new ArrayList<Integer>();
+//		int pivot = 0, pivotNum = 0, factor = 0;
+//		boolean notFind = true;
+//
+//		// Operaciones elementales para encontrar invariantes
+//		for (int j = 0; j < colInc; j++) {
+//			for (int i = 0; i < concat.length; i++) {
+//
+//				if (concat[i][j] != 0 && notFind) {
+//					pivot    = i;
+//					pivotNum = concat[i][j];
+//					notFind  = false;
+//					regPivot.add(pivot);
+//					System.out.println("\npivot in row = "+pivot+" col="+j+" value = "+pivotNum);
+//				}
+//				if (concat[i][j] != 0 && notFind == false && i != pivot) {
+//					factor = (concat[i][j] == pivotNum) ? -1 : 1;
+//					System.out.println("\nfactor = "+factor);
+//            		System.out.println("\"  en for k: \nrow ="+i+"  col= "+j+" valor = "+concat[i][j]);
+//					for (int k = 0; k < concat[0].length; k++) {
+//						concat[i][k] = concat[i][k] + factor * (concat[pivot][k]);
+//					}
+//				}
+//			}
+//			for (int k = 0; k < concat[0].length; k++) {
+//				concat[pivot][k] = 0;
+//			}
+//			printMatrix(concat);
+//			notFind = true;
+//		}
+//		
+//		
+//		System.out.println("----------PIVOTES:----------");
+//        for(int pivote :regPivot) {
+//        	System.out.println(pivote);
+//        }
+//        System.out.println("-------------------------------");
+//        
+//        
+//		// Se extraen las filas y columnas sin importancia
+//		int row = 0;
+//		int[][] invariants = new int[rowInc - regPivot.size()][rowInc];
+//		for (int i = 0; i < concat.length; i++) {
+//			for (int j = colInc; j < concat[0].length; j++) {
+//				if (!regPivot.contains(i)) {
+//					invariants[row][(j - colInc)] = concat[i][j];
+//				}
+//			}
+//			if (!regPivot.contains(i)) {
+//				row++;
+//			}
+//		}
+//		Log.spit("P-invariantes");
+//		printMatrix(invariants);
+		//Log.spit(printMatrix(invariants));
 	}
 
 
@@ -209,6 +261,7 @@ public class RedDePetri {
 	}
 
 	public int[][] concatMatrix(int[][] inc, int[][] id) {
+	
 		int N = inc.length, M = inc[0].length + id[0].length;
 		int row = 0, col = 0;
 		int[][] concat = new int[N][M];
@@ -249,18 +302,41 @@ public class RedDePetri {
 	public int[] getMarcaInicial() {
 		return marcaInicial;
 	}
-	public String  printMatrix(int[][] matrix) {
-		String s = "";
-		for(int i=0; i<matrix.length ; i++) {
-			s+="\n[ ";
-			for(int j=0; j<matrix[0].length ; j++) {
-				s+=""+matrix[i][j]+", ";
+	public void  printMatrix(int[][] m) {
+		System.out.println("\n\n--------------------------------------------");
+		System.out.println("Mi");
+		for(int i=0; i<m.length ; i++) {
+			System.out.println();
+			for(int j=0; j<m[0].length; j++) {
+				if(j==19 && m[i][j]>=0) {
+					System.out.print("| "+m[i][j]+", ");
+				}
+				else if(j==19 && m[i][j]<0) {
+					System.out.print("|"+m[i][j]+", ");
+				}
+				else {
+				if(m[i][j]>=0) {
+					System.out.print(" "+m[i][j]+", ");
+				}
+				else {
+					System.out.print(m[i][j]+", ");
+				}}
 			}
-			s+="]";
 		}
-
-		return s;
+		System.out.println("\n--------------------------------------------\n");
 	}
+//	public String  printMatrix(int[][] matrix) {
+//		String s = "";
+//		for(int i=0; i<matrix.length ; i++) {
+//			s+="\n[ ";
+//			for(int j=0; j<matrix[0].length ; j++) {
+//				s+=""+matrix[i][j]+", ";
+//			}
+//			s+="]";
+//		}
+//
+//		return s;
+//	}
 	public String strTranSensible() {
 		String v = "";
 		for (int i = 0; i < tranSensibilizadas.length; i++) {

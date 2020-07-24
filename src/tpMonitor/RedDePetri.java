@@ -182,7 +182,7 @@ public class RedDePetri {
 	private void farkasAlgorithm(int[][] concat, int rowInc, int colInc) {
 		
 		ArrayList<int[]> mtxAmpliada = new ArrayList<>();
-		int[] vecAux= new int[concat[0].length];
+		
 		int pivot = 0;
 	    int pivotNum = 0;
 		
@@ -194,92 +194,59 @@ public class RedDePetri {
 		//System.out.println(mtxAmpliada.get(i)[j]);
 		
 		for(int j=0; j<colInc; j++) {
+			System.out.println("\n\n**********************");
 			for(int i=0; i<rowInc; i++) {
 				if (mtxAmpliada.get(i)[j] != 0) {
 					pivotNum = mtxAmpliada.get(i)[j];
 					pivot    = i;
+					System.out.println("\npivot in row = "+pivot+" col="+j+" value = "+pivotNum);
 				
-				for(int k=i+1;k<rowInc;k++) {
+					
+				for(int k=i+1;k<mtxAmpliada.size();k++) {
 					if(mtxAmpliada.get(k)[j] == (-1*pivotNum)) {
+						System.out.println("Tsugi: "+mtxAmpliada.get(k)[j]);
+						int[] vecAux= new int[concat[0].length];
 						for(int l=0;l<concat[0].length;l++) {
 							vecAux[l]=mtxAmpliada.get(k)[l]+mtxAmpliada.get(pivot)[l];
 						}
+						
+						System.out.println(Arrays.toString(vecAux));
+						
 						mtxAmpliada.add(vecAux);
 					}
 				  }
 				}
 			}
-//			ArrayList <int[]> mtxAux = mtxAmpliada;
-//			for(int x=0; x<mtxAux.size() ;x++) {
-//				if(mtxAux.get(x)[j]!=0) {
-//					mtxAmpliada.remove(x);
-//				}
-//			}
+			printArray(mtxAmpliada,"Mtx "+j+" added");
+			for(int[] vector: mtxAmpliada) {
+				if(vector[j]!=0) {
+					for(int x=0;x<vector.length;x++) {
+						vector[x]=0;
+					}
+				}
+			}
+			printArray(mtxAmpliada,"Mtx "+j+" removed");
+			System.out.println("*********************************");
 		}
-        for(int[] vector : mtxAmpliada) {
-        	String s= "";
-        	for(int j=0;j<vector.length;j++) {
-        	         s += ""+vector[j]+", ";
-        	}
-        	
-        	//Arrays.toString(vector);
-        	System.out.println(s);
-        }
-//		ArrayList<Integer> regPivot = new ArrayList<Integer>();
-//		int pivot = 0, pivotNum = 0, factor = 0;
-//		boolean notFind = true;
-//
-//		// Operaciones elementales para encontrar invariantes
-//		for (int j = 0; j < colInc; j++) {
-//			for (int i = 0; i < concat.length; i++) {
-//
-//				if (concat[i][j] != 0 && notFind) {
-//					pivot    = i;
-//					pivotNum = concat[i][j];
-//					notFind  = false;
-//					regPivot.add(pivot);
-//					System.out.println("\npivot in row = "+pivot+" col="+j+" value = "+pivotNum);
-//				}
-//				if (concat[i][j] != 0 && notFind == false && i != pivot) {
-//					factor = (concat[i][j] == pivotNum) ? -1 : 1;
-//					System.out.println("\nfactor = "+factor);
-//            		System.out.println("\"  en for k: \nrow ="+i+"  col= "+j+" valor = "+concat[i][j]);
-//					for (int k = 0; k < concat[0].length; k++) {
-//						concat[i][k] = concat[i][k] + factor * (concat[pivot][k]);
-//					}
-//				}
-//			}
-//			for (int k = 0; k < concat[0].length; k++) {
-//				concat[pivot][k] = 0;
-//			}
-//			printMatrix(concat);
-//			notFind = true;
-//		}
-//		
-//		
-//		System.out.println("----------PIVOTES:----------");
-//        for(int pivote :regPivot) {
-//        	System.out.println(pivote);
-//        }
-//        System.out.println("-------------------------------");
-//        
-//        
-//		// Se extraen las filas y columnas sin importancia
-//		int row = 0;
-//		int[][] invariants = new int[rowInc - regPivot.size()][rowInc];
-//		for (int i = 0; i < concat.length; i++) {
-//			for (int j = colInc; j < concat[0].length; j++) {
-//				if (!regPivot.contains(i)) {
-//					invariants[row][(j - colInc)] = concat[i][j];
-//				}
-//			}
-//			if (!regPivot.contains(i)) {
-//				row++;
-//			}
-//		}
-//		Log.spit("P-invariantes");
-//		printMatrix(invariants);
-		//Log.spit(printMatrix(invariants));
+		
+		ArrayList<int[]> invariantes = new ArrayList<int[]>();
+		boolean filaNoNula = false;
+		for(int[] vector: mtxAmpliada) {
+				for(int x=colInc;x<vector.length;x++) {
+					if(vector[x]!=0) {filaNoNula=true;}
+				}
+				if(filaNoNula) {
+					int[] vecAux=new int[rowInc];
+					for(int y=colInc;y<vector.length;y++) {
+						vecAux[y-colInc]=vector[y];
+					}
+					invariantes.add(vecAux);
+					filaNoNula=false;
+				}
+			
+		}
+		printArray(invariantes,"vct removed");
+
 	}
 
 
@@ -360,6 +327,26 @@ public class RedDePetri {
 		}
 		System.out.println("\n--------------------------------------------\n");
 	}
+	public void printArray(ArrayList <int[]> mtxAmpliada,String title) {
+		System.out.println("\n\n--------------------------------------------");
+		System.out.println(title);
+		 for(int[] vector : mtxAmpliada) {
+	        	String s= "";
+	        	for(int j=0;j<vector.length;j++) {
+	        		if(vector[j]>=0) {
+	        	         s += " "+vector[j]+", ";
+	        		}
+	        		else {
+	        			s += ""+vector[j]+", ";
+	        		}
+	        	}
+	        	
+	        	//Arrays.toString(vector);
+	        	System.out.println(s);
+	        }
+			System.out.println("\n--------------------------------------------\n");
+	}
+
 //	public String  printMatrix(int[][] matrix) {
 //		String s = "";
 //		for(int i=0; i<matrix.length ; i++) {

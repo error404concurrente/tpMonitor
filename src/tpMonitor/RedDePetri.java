@@ -61,8 +61,8 @@ public class RedDePetri {
 //		System.out.println("Concat N: "+concat.length);
 //		System.out.println("Concat M: "+concat[0].length);
 //		printMatrix(concat);
-		System.out.println("TRANSPUESTA");
-		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
+		//System.out.println("TRANSPUESTA");
+		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public void changeCurrent(int[] newCurrent) {
@@ -180,16 +180,51 @@ public class RedDePetri {
 	}
 	
 	private void farkasAlgorithm(int[][] concat, int rowInc, int colInc) {
-		ArrayList<int[]> m = new ArrayList<>();
+		
+		ArrayList<int[]> mtxAmpliada = new ArrayList<>();
+		int[] vecAux= new int[concat[0].length];
+		int pivot = 0;
+	    int pivotNum = 0;
+		
 		for(int i=0; i<concat.length;i++) {
-			m.add(concat[i]);
+			mtxAmpliada.add(concat[i]);
 		}
-		System.out.println("***************************************");
-		for(int j=0; j<concat[0].length;j++) {
-			//int [] aux =
-			System.out.println(m.get(0)[j]);
+	
+		//System.out.println("***************rowInc************"+rowInc);
+		//System.out.println(mtxAmpliada.get(i)[j]);
+		
+		for(int j=0; j<colInc; j++) {
+			for(int i=0; i<rowInc; i++) {
+				if (mtxAmpliada.get(i)[j] != 0) {
+					pivotNum = mtxAmpliada.get(i)[j];
+					pivot    = i;
+				
+				for(int k=i+1;k<rowInc;k++) {
+					if(mtxAmpliada.get(k)[j] == (-1*pivotNum)) {
+						for(int l=0;l<concat[0].length;l++) {
+							vecAux[l]=mtxAmpliada.get(k)[l]+mtxAmpliada.get(pivot)[l];
+						}
+						mtxAmpliada.add(vecAux);
+					}
+				  }
+				}
+			}
+//			ArrayList <int[]> mtxAux = mtxAmpliada;
+//			for(int x=0; x<mtxAux.size() ;x++) {
+//				if(mtxAux.get(x)[j]!=0) {
+//					mtxAmpliada.remove(x);
+//				}
+//			}
 		}
-
+        for(int[] vector : mtxAmpliada) {
+        	String s= "";
+        	for(int j=0;j<vector.length;j++) {
+        	         s += ""+vector[j]+", ";
+        	}
+        	
+        	//Arrays.toString(vector);
+        	System.out.println(s);
+        }
 //		ArrayList<Integer> regPivot = new ArrayList<Integer>();
 //		int pivot = 0, pivotNum = 0, factor = 0;
 //		boolean notFind = true;

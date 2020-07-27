@@ -28,11 +28,11 @@ public class RedDePetri {
 		}
 		
 		Log.spit("P-invariantes");
-		farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
+		//farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
 
 		Log.spit("T-invariantes");
-		int [][] mT = getTranspuesta(inc);
-		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
+		//int [][] mT = getTranspuesta(inc);
+		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public void changeCurrent(int[] newCurrent) {
@@ -50,8 +50,8 @@ public class RedDePetri {
 //		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
 //		Log.spit("-------------- Fin Resultados --------------");
 		Politicas.aumentar(hilo);
-		int [][] mT = getTranspuesta(matrizIncidencia);
-		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
+		//int [][] mT = getTranspuesta(matrizIncidencia);
+		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo){
@@ -92,7 +92,7 @@ public class RedDePetri {
 	}
 
 	private void calcularVectorSensible(){
-		int[] s = new int[matrizIncidencia[0].length];  //vector auxiliar S
+		int[] s = new int[marcaActual.length];  //vector auxiliar S
 		int[] aux = new int[tranSensibilizadas.length];
 		for (int i = 0; i < aux.length; i++) {
 			aux[i]=tranSensibilizadas[i];

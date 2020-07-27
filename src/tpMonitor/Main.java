@@ -40,24 +40,24 @@ public class Main {
 //		politica.inicializar(N_TAREAS);
 		//Creacion de Politica
 		Politicas politica = new Politicas(N_TAREAS);
-
-		int [][] tareas = {{1,0,0,0,0,0},{0,1,0,0,0,0},{0,0,1,0,0,0},{0,0,0,1,0,0},{0,0,0,0,1,0},{0,0,0,0,0,1}};
+																											//El ultimo para doble transicion
+		int [][] tareas = {{1,0,0,0,0,0},{0,1,0,0,0,0},{0,0,1,0,0,0},{0,0,0,1,0,0},{0,0,0,0,1,0},{0,0,0,0,0,1},{0,0,0,0,0,0} };
 		ArrayList <Thread> hilito = new ArrayList<Thread>();
 
-		hilito.add(new Thread(new Hilo(monitor, tareas[0], true, 0, 1),"hilito "+0));
+		hilito.add(new Thread(new Hilo(monitor, tareas[0], tareas[0], true, 0, 1),"hilito "+0));
 		//politica.setContador(0);
 		hilito.get(0).start();
-		hilito.add(new Thread(new Hilo(monitor, tareas[1], true, 1, 0),"hilito "+1));
+		hilito.add(new Thread(new Hilo(monitor, tareas[1],tareas[1], true, 1, 0),"hilito "+1));
 		//politica.setContador(1);
 		hilito.get(1).start();
 		
-		hilito.add(new Thread(new Hilo(monitor, tareas[2], false, 2, 2 ),"hilito "+2));
+		hilito.add(new Thread(new Hilo(monitor, tareas[2],tareas[2], false, 2, 2 ),"hilito "+2));
 		hilito.get(2).start();
-		hilito.add(new Thread(new Hilo(monitor, tareas[3], false, 3, 3 ),"hilito "+3));
+		hilito.add(new Thread(new Hilo(monitor, tareas[3],tareas[3], false, 3, 3 ),"hilito "+3));
 		hilito.get(3).start();
 		
 		for(int i=4; i<N_TAREAS;i++) {
-				hilito.add(new Thread(new Hilo(monitor, tareas[i], false, i, i),"hilito "+i));
+				hilito.add(new Thread(new Hilo(monitor, tareas[i],tareas[i], false, i, i),"hilito "+i));
 				hilito.get(i).start();
 		}
 	}

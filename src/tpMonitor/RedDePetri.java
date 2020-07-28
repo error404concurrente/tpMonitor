@@ -28,41 +28,39 @@ public class RedDePetri {
 		}
 		
 		
-		int [][] identAux =getidentityMatrix(inc.length);		
-		System.out.println("Identidad N: "+identAux.length);
-		System.out.println("Identidad M: "+identAux[0].length);
-		printMatrix(identAux);
-		
-		System.out.println("Incidencia N: "+inc.length);
-		System.out.println("Incidencia M: "+inc[0].length);
-		printMatrix(inc);
-		int [][] concat = concatMatrix(inc,getidentityMatrix(inc.length));
-		
-		System.out.println("Concat N: "+concat.length);
-		System.out.println("Concat M: "+concat[0].length);
-		printMatrix(concat);
-		
-		
-		farkasAlgorithm(concat,inc.length,inc[0].length);
+//		int [][] identAux =getidentityMatrix(inc.length);		
+//		System.out.println("Identidad N: "+identAux.length);
+//		System.out.println("Identidad M: "+identAux[0].length);
+//		//printMatrix(identAux);
+//		
+//		System.out.println("Incidencia N: "+inc.length);
+//		System.out.println("Incidencia M: "+inc[0].length);
+//		//printMatrix(inc);
+//		int [][] concat = concatMatrix(inc,getidentityMatrix(inc.length));
+//		
+//		System.out.println("Concat N: "+concat.length);
+//		System.out.println("Concat M: "+concat[0].length);
+//		printMatrix(concat);	
+//		farkasAlgorithm(concat,inc.length,inc[0].length);
 
 		//Log.spit("T-invariantes");
 		int [][] mT = getTranspuesta(inc);
 		
-//		int [][] identAux =getidentityMatrix(mT.length);		
-//		System.out.println("Identidad N: "+identAux.length);
-//		System.out.println("Identidad M: "+identAux[0].length);
-//		printMatrix(identAux);
-//		
-//		System.out.println("Incidencia N: "+mT.length);
-//		System.out.println("Incidencia M: "+mT[0].length);
-//		printMatrix(inc);
-//		int [][] concat = concatMatrix(mT,getidentityMatrix(mT.length));
-//		
-//		System.out.println("Concat N: "+concat.length);
-//		System.out.println("Concat M: "+concat[0].length);
-//		printMatrix(concat);
-		//System.out.println("TRANSPUESTA");
-		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
+		int [][] identAux =getidentityMatrix(mT.length);		
+		System.out.println("Identidad N: "+identAux.length);
+		System.out.println("Identidad M: "+identAux[0].length);
+		printMatrix(identAux);
+		
+		System.out.println("Incidencia N: "+mT.length);
+		System.out.println("Incidencia M: "+mT[0].length);
+		printMatrix(inc);
+		int [][] concat = concatMatrix(mT,getidentityMatrix(mT.length));
+		
+		System.out.println("Concat N: "+concat.length);
+		System.out.println("Concat M: "+concat[0].length);
+		printMatrix(concat);
+		System.out.println("TRANSPUESTA");
+		farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public void changeCurrent(int[] newCurrent) {
@@ -194,8 +192,11 @@ public class RedDePetri {
 		//System.out.println(mtxAmpliada.get(i)[j]);
 		
 		for(int j=0; j<colInc; j++) {
-			System.out.println("\n\n**********************");
-			for(int i=0; i<rowInc; i++) {
+//			if(j==11){
+//				break;
+//			}
+			System.out.println("\n\n*********col "+j+"**********");
+			for(int i=0; i<mtxAmpliada.size(); i++) {
 				if (mtxAmpliada.get(i)[j] != 0) {
 					pivotNum = mtxAmpliada.get(i)[j];
 					pivot    = i;
@@ -204,7 +205,7 @@ public class RedDePetri {
 					
 				for(int k=i+1;k<mtxAmpliada.size();k++) {
 					if(mtxAmpliada.get(k)[j] == (-1*pivotNum)) {
-						System.out.println("Tsugi: "+mtxAmpliada.get(k)[j]);
+						System.out.println("Tsugi: "+mtxAmpliada.get(k)[j]+" en row= "+k+" col= "+j);
 						int[] vecAux= new int[concat[0].length];
 						for(int l=0;l<concat[0].length;l++) {
 							vecAux[l]=mtxAmpliada.get(k)[l]+mtxAmpliada.get(pivot)[l];
@@ -310,7 +311,7 @@ public class RedDePetri {
 		for(int i=0; i<m.length ; i++) {
 			System.out.println();
 			for(int j=0; j<m[0].length; j++) {
-				if(j==19 && m[i][j]>=0) {
+				if(j==17 && m[i][j]>=0) {
 					System.out.print("| "+m[i][j]+", ");
 				}
 				else if(j==19 && m[i][j]<0) {
@@ -334,10 +335,10 @@ public class RedDePetri {
 	        	String s= "";
 	        	for(int j=0;j<vector.length;j++) {
 	        		if(vector[j]>=0) {
-	        	         s += " "+vector[j]+", ";
+	        	         s += " "+vector[j]+",";
 	        		}
 	        		else {
-	        			s += ""+vector[j]+", ";
+	        			s += ""+vector[j]+",";
 	        		}
 	        	}
 	        	

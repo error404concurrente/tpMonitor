@@ -8,13 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Log {
-	private static final SimpleDateFormat sdfTitulo = new SimpleDateFormat("[dd:mm:yyyy]-[HH:mm:ss]: ");
+	private static final SimpleDateFormat sdfTitulo = new SimpleDateFormat("[dd:MM:yyyy]-[HH:mm:ss]: ");
 	public static PrintStream archivo;
 	public static ArrayList<Integer> disparos = new ArrayList<Integer>();
+	public static PrintStream consola;
 	
 	public static void createLog() throws FileNotFoundException {
+		consola = System.out;
 		Date resultdate = new Date(System.currentTimeMillis());
-		System.out.println("Log: Creando archivo log...");
 		archivo = new PrintStream(new File("log"+sdfTitulo.format(resultdate)+".txt"));
 		System.setOut(archivo);
 	}
@@ -32,19 +33,22 @@ public class Log {
 	
 	public static void addDisparo(int[] disparo) {
 		for (int i = 0; i < disparo.length; i++) {
-			disparos.add(disparo[i]);
+			if(disparo[i]==1) {
+				disparos.add(i);
+			}
 		}
 	}
 	
 	public static void createLogDisparos() throws FileNotFoundException {
-		archivo = new PrintStream(new File("log"+sdfTitulo.format("disparos.txt")));
+		archivo = new PrintStream(new File("disparos.txt"));
 		System.setOut(archivo);
 		for (int i = 0; i < disparos.size(); i++) {
-			if(i%17==0) {
-				System.out.print(disparos.get(i)+"");
-			}else {
 				System.out.print(disparos.get(i)+" ");
-			}
 		}		
 	}
+	
+	public static void change2Console() {
+		System.setOut(consola);
+	}
+
 }

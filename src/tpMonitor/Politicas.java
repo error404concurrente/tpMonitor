@@ -6,10 +6,12 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 public final class Politicas {
 
-	private static TreeMap<Integer,Integer> contador;
+	public static TreeMap<Integer,Integer> contador;
+	private static int limite;
 	
-	public Politicas(int cantidad) {
-		contador = new TreeMap<Integer,Integer>(); 
+	public Politicas(int cantidad, int limite) {
+		contador = new TreeMap<Integer,Integer>();
+		setLimite(limite);
 		inicializar(cantidad);
 	}
 	
@@ -44,5 +46,29 @@ public final class Politicas {
 		for( int i = 0; i < cantidad; i++ ) {
 			contador.put( i, 0 );
 		}
+	}
+	
+	public static boolean terminado() {
+		if(getMil()<getLimite()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	public static int getMil() {
+		int a = contador.get(5);
+		int b = contador.get(6)/2;
+		int c = contador.get(7)/2;
+		int d = contador.get(16); 
+		return a+b+c+d;
+	}
+
+	public static int getLimite() {
+		return limite;
+	}
+
+	private static void setLimite(int limite) {
+		Politicas.limite = limite;
 	}
 }

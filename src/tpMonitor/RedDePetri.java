@@ -27,10 +27,10 @@ public class RedDePetri {
 			transTimestamp[i]=System.currentTimeMillis();
 		}
 		
-		Log.spit("P-invariantes");
+//		Log.spit("P-invariantes");
 		//farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
 
-		Log.spit("T-invariantes");
+//		Log.spit("T-invariantes");
 		//int [][] mT = getTranspuesta(inc);
 		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}

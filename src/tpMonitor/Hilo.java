@@ -10,7 +10,6 @@ public class Hilo implements Runnable{
 	private boolean politico;
 	private int ID;
 	private int IDR;
-	private boolean terminado;
 	
 	public Hilo(Monitor monitor, int[] tarea, int[] secundario, boolean politico, int ID, int IDR){
 		this.monitor = monitor;
@@ -19,11 +18,10 @@ public class Hilo implements Runnable{
 		this.politico = politico;
 		this.ID = ID;
 		this.IDR = IDR;
-		this.terminado = false;
 	}
 	
 	public void run(){		
-		for (int i = 0; i < 3; i++) {
+		while(!Politicas.terminado()) {
 			try {
 				monitor.enter(this);
 			} catch (InterruptedException e) {
@@ -34,7 +32,6 @@ public class Hilo implements Runnable{
             tarea = secundario;
             secundario = aux;
 		}
-		terminado = true;
 	}
 	
 	public String strTarea() {
@@ -60,8 +57,5 @@ public class Hilo implements Runnable{
 	public int getIDR() {
 		return IDR;
 	}
-	
-	public boolean getEstado() {
-		return terminado;
-	}
+
 }

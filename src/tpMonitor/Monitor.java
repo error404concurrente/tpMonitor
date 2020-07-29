@@ -40,27 +40,28 @@ public final class Monitor {
 	}
 
 	private void execute(Hilo hilo) throws InterruptedException {
-		if ( rdp.verificarCompatibilidad(hilo.getTarea(),hilo) ) {
-			if(rdp.checkTemporal(hilo)) { //Es compatible y esta dentro de la ventana temporal
-				rdp.disparar(hilo);
-				mutex.release();
-				colaEspera.buscarEspera();
-			}else { //Es compatible pero no esta en la ventana temporal
-//				Log.spit("Me voy alv "+Thread.currentThread().getName());
+		if(!Politicas.terminado()) {
+			if ( rdp.verificarCompatibilidad(hilo.getTarea(),hilo) ) {
+				if(rdp.checkTemporal(hilo)) { //Es compatible y esta dentro de la ventana temporal
+					rdp.disparar(hilo);
+					mutex.release();
+					colaEspera.buscarEspera();
+				}else { //Es compatible pero no esta en la ventana temporal
+	//				Log.spit("Me voy alv "+Thread.currentThread().getName());
+					mutex.release();
+					entrada.release();
+					Thread.sleep(rdp.mimirTime(hilo));
+					enter(hilo);
+				}
+			} else { //No es compatible
+	//			Log.spit("A mimir");
 				mutex.release();
 				entrada.release();
-				Thread.sleep(rdp.mimirTime(hilo));
-				enter(hilo);
+				colaEspera.encolar(hilo);
+	//			Log.spit("ME VOY A EJECUTAR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
+				mutex.acquire();
+				execute(hilo);
 			}
-		} else { //No es compatible
-//			Log.spit("A mimir");
-			mutex.release();
-			entrada.release();
-			colaEspera.encolar(hilo);
-//			Log.spit("ME VOY A EJECUTAR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
-			mutex.acquire();
-			execute(hilo);
-
 		}
 	}
 }

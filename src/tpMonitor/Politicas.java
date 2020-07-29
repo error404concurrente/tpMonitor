@@ -16,7 +16,7 @@ public final class Politicas {
 	public static Boolean decidirYo(Hilo hilito) {
 		
 		if (contador.get(hilito.getID()) <= contador.get(hilito.getIDR())) {
-			Log.spit("Voy: "+contador.get(hilito.getID())+" y el otro va: "+ contador.get(hilito.getIDR()));
+//			Log.spit("Voy: "+contador.get(hilito.getID())+" y el otro va: "+ contador.get(hilito.getIDR()));
 			return true;
 		} 
 		return false;
@@ -26,7 +26,7 @@ public final class Politicas {
 		
 		for (Hilo hilito2 : espera) {
 			if (hilito.getIDR() == hilito2.getID()) {
-				Log.spit("Voy: "+contador.get(hilito.getID())+" y el otro va: "+ contador.get(hilito.getIDR()));
+//				Log.spit("Voy: "+contador.get(hilito.getID())+" y el otro va: "+ contador.get(hilito.getIDR()));
 				return true;
 				} 
 			}
@@ -37,7 +37,7 @@ public final class Politicas {
 		//Log.spit("Voy: "+contador.get(hilito.getID())+" y el otro va: "+ contador.get(hilito.getIDR()));
 		contador.replace(hilito.getID(), contador.get(hilito.getID()),
 				contador.get(hilito.getID()) + 1);
-		Log.spit("Ahora voy: "+contador.get(hilito.getID()));
+//		Log.spit("Ahora voy: "+contador.get(hilito.getID()));
 	}
 	
 	private void inicializar(int cantidad) {

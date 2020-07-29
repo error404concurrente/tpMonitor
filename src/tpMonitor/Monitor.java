@@ -36,7 +36,6 @@ public final class Monitor {
 			e.printStackTrace();
 		}
 		execute(hilo);
-		Log.spit("[Disparo Efectuado]: "+hilo.strTarea()+"  [Estado Actual]: "+rdp.strMarcaActual()+" [T.Sensibilizadas]: "+rdp.strTranSensible());
 //		Log.spit("TERMINE ME VOY " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 	}
 
@@ -47,13 +46,14 @@ public final class Monitor {
 				mutex.release();
 				colaEspera.buscarEspera();
 			}else { //Es compatible pero no esta en la ventana temporal
-				Log.spit("Me voy alv");
+//				Log.spit("Me voy alv "+Thread.currentThread().getName());
 				mutex.release();
 				entrada.release();
 				Thread.sleep(rdp.mimirTime(hilo));
 				enter(hilo);
 			}
 		} else { //No es compatible
+//			Log.spit("A mimir");
 			mutex.release();
 			entrada.release();
 			colaEspera.encolar(hilo);

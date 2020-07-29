@@ -46,6 +46,7 @@ public class RedDePetri {
 //		Log.spit("Estado de RdP Antes:   " + strMarcaActual() + "  ----  T. Sensibles Antes:   " + strTranSensible());
 		calcularMarcaActual(hilo.getTarea());
 		calcularVectorSensible();
+		Log.spit("[Disparo Efectuado]: "+Thread.currentThread().getName()+"  [Estado Actual]: "+strMarcaActual()+" [T.Sensibilizadas]: "+strTranSensible());
 //		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
 //		Log.spit("-------------- Fin Resultados --------------");
 		Politicas.aumentar(hilo);

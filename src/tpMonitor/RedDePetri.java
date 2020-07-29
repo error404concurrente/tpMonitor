@@ -12,7 +12,9 @@ public class RedDePetri {
 	private int [] marcaActual;
 	private long [] alfa;
 	private long [] beta;
-
+//	//BORRAR
+//	private int [][] pinv = {{1,1,1,0,0,0,0},{0,0,1,1,0,0,1},{0,0,0,0,1,1,1}};
+//    private int[]m0 = {1,0,0,1,1,0,0};
 
 	public RedDePetri(int[][] inc, int[] trans, int[] act, long [] alfa, long [] beta) {
 		matrizIncidencia= inc;
@@ -28,11 +30,8 @@ public class RedDePetri {
 		}
 		
 		Log.spit("P-invariantes");
-		//farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
+		//showPinvariants(pinv,m0);
 
-		Log.spit("T-invariantes");
-		//int [][] mT = getTranspuesta(inc);
-		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public void changeCurrent(int[] newCurrent) {
@@ -45,6 +44,7 @@ public class RedDePetri {
 //		Log.spit("-------------- Resultados de Disparo --------------");
 //		Log.spit("Estado de RdP Antes:   " + strMarcaActual() + "  ----  T. Sensibles Antes:   " + strTranSensible());
 		calcularMarcaActual(hilo.getTarea());
+		
 		mimeador(hilo);
 		calcularVectorSensible();
 //		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
@@ -53,7 +53,30 @@ public class RedDePetri {
 		//int [][] mT = getTranspuesta(matrizIncidencia);
 		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
-
+	public void showPinvariants(int[][] pinvariant,int[] m) {
+		String s = "";
+		boolean first=false;
+		int k=0;
+		for(int i=0; i<pinvariant.length;i++){
+			first = true;
+			for(int j=0;j<pinvariant[0].length;j++) {
+				
+				if(pinvariant[i][j]!=0 && first) {
+					s+= " P"+j+"("+m[j]+") ";
+					k += m[j];
+					first = false;
+				}
+				else if(pinvariant[i][j]!=0){
+					  k += m[j];
+					  s += "+  P"+j+"("+m[j]+")";
+				}
+			}
+			s+= "= "+k;
+		    Log.spit(s);
+			k=0;
+			s="";
+		}
+	}
 	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo){
 		//Ej: verificarCompatibilidad(hilo.getTarea())
 		for(int i = 0; i < tranSensibilizadas.length; i++) {

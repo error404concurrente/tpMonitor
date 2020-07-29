@@ -34,7 +34,7 @@ public class Main {
 						{ 0,  0,  0, -1, -1,  1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  1},
 						{ 0,  0,  0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0},
 						{ 0,  0,  0,  0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  1,  0,  0,  0} };
-		
+	
 		
 		int[] marking = { 0,  0,  0,  8,  8,  4,  4,  0,  0,  0,  0,  1,  1,  1,  0,  0,  1,  0,  0};
 		Log.spit(marking.length+"");
@@ -84,7 +84,7 @@ public class Main {
 		
 		for(int i=0; i<N_TRANS;i++) {
 				hilito.add(new Thread(new Hilo(monitor, transiciones[i], false, i, i),"hilito "+i));
-				hilito.get(i).start();
+			//	hilito.get(i).start();
 		}
 	}
 }

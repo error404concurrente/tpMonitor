@@ -45,29 +45,29 @@ public class RedDePetri {
 //		Log.spit("-------------- Resultados de Disparo --------------");
 //		Log.spit("Estado de RdP Antes:   " + strMarcaActual() + "  ----  T. Sensibles Antes:   " + strTranSensible());
 		calcularMarcaActual(hilo.getTarea());
-		mimeador(hilo);
 		calcularVectorSensible();
 //		Log.spit("Estado de RdP Despues: " + strMarcaActual() + "  ----  T. Sensibles Despues: " + strTranSensible());
 //		Log.spit("-------------- Fin Resultados --------------");
 		Politicas.aumentar(hilo);
+		Log.addDisparo(hilo.getTarea());
 		//int [][] mT = getTranspuesta(matrizIncidencia);
 		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
-	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo){
+	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo) throws InterruptedException{
 		//Ej: verificarCompatibilidad(hilo.getTarea())
 		for(int i = 0; i < tranSensibilizadas.length; i++) {
 			if(tranSensibilizadas[i]==1 && tarea[i]==1){
-				if(( !hilo.getPolitico() || (hilo.getPolitico() && Politicas.decidirYo(hilo)))) {
-//				Log.spit("RDP - Transicion detectada: T"+i);
-				return true;
+					if(( !hilo.getPolitico() || (hilo.getPolitico() && Politicas.decidirYo(hilo)))) {
+	//				Log.spit("RDP - Transicion detectada: T"+i);
+					return true;
 				}
 			}
 		}
 //		Log.spit("Compatibilidad Denegada");
 		return false;
 	}
-
+	
 	public boolean verificarCompatibilidad(int[] tarea){
 		//Ej: verificarCompatibilidad(hilo.getTarea())
 		boolean compatible = false;
@@ -126,7 +126,7 @@ public class RedDePetri {
 		}	
 	}
 		
-	private void mimeador(Hilo hilo) throws InterruptedException {
+	public boolean checkTemporal(Hilo hilo) throws InterruptedException {
 		int[] aux = hilo.getTarea();
 		for (int i = 0; i < aux.length; i++) {
 			if (aux[i] == 1) {
@@ -135,18 +135,30 @@ public class RedDePetri {
 				if (t > 0) {
 //					Log.spit("MIMIENDO");
 //					Log.spit("t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   " + transTimestamp[i]);
-					Thread.sleep(t);
-					break;
+					return false;
 				}else if( t<=0 && beta[i] >= tSensible) {
 //					Log.spit("NO MIMIENDO: t:" + t + "   " + alfa[i] + "  " + System.currentTimeMillis() + "   "+ transTimestamp[i]);
-					break;
+					return true;
 				}else if( t<=0 && beta[i] < tSensible ){
 					Log.spit(beta[i]+" ");
 //					Log.spit("Error de Beta: "+tSensible+">beta");
-					break;
+					return false;
 				}
 			}
 		}
+		return true;
+	}
+	
+	public long mimirTime(Hilo hilo) {
+		int[] aux = hilo.getTarea();
+		for (int i = 0; i < aux.length; i++) {
+			if (aux[i] == 1) {
+				long tSensible = System.currentTimeMillis() - transTimestamp[i];
+				long t = alfa[i] - tSensible;
+				return t;
+			}
+		}
+		return 1000;
 	}
 	
 	private void farkasAlgorithm(int[][] concat, int rowInc, int colInc) {

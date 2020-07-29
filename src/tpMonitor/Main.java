@@ -37,12 +37,12 @@ public class Main {
 		
 		
 		int[] marking = { 0,  0,  0,  8,  8,  4,  4,  0,  0,  0,  0,  1,  1,  1,  0,  0,  1,  0,  0};
-		Log.spit(marking.length+"");
+
 		int[] tSensibility = { 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
 		
 		final int cantHilos = 99;
 		//Tiempo en ms
-		long[] alfa = {50,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
+		long[] alfa = {70,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
 		long[] beta = {0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff};
 
 		//Creacion de RpP
@@ -83,8 +83,15 @@ public class Main {
 		ArrayList <Thread> hilito = new ArrayList<Thread>();
 		
 		for(int i=0; i<N_TRANS;i++) {
-				hilito.add(new Thread(new Hilo(monitor, transiciones[i], false, i, i),"hilito "+i));
+				hilito.add(new Thread(new Hilo(monitor, transiciones[i], transiciones[i] , false, i, i),"hilito "+i));
 				hilito.get(i).start();
 		}
+		
+//		boolean todosTerminaron = false;
+//		while(!todosTerminaron) {
+//			for(int i=0; i<N_TRANS;i++) {
+//				hilito.get(i).getEstado();
+//			}
+//		}
 	}
 }

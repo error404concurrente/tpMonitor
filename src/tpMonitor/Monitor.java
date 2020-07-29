@@ -42,15 +42,20 @@ public final class Monitor {
 
 	private void execute(Hilo hilo) throws InterruptedException {
 		if ( rdp.verificarCompatibilidad(hilo.getTarea(),hilo) ) {
-			rdp.disparar(hilo);
-//			Log.spit("ES COMPATIBLE");
-			mutex.release();
-			colaEspera.buscarEspera();
-		} else {
-//			Log.spit("NO ES COMPATIBLE-PA la espera");
+			if(rdp.checkTemporal(hilo)) { //Es compatible y esta dentro de la ventana temporal
+				rdp.disparar(hilo);
+				mutex.release();
+				colaEspera.buscarEspera();
+			}else { //Es compatible pero no esta en la ventana temporal
+				Log.spit("Me voy alv");
+				mutex.release();
+				entrada.release();
+				Thread.sleep(rdp.mimirTime(hilo));
+				enter(hilo);
+			}
+		} else { //No es compatible
 			mutex.release();
 			entrada.release();
-			//colaEspera.espera(); //En caso que pregunten antes de irse a dormir
 			colaEspera.encolar(hilo);
 //			Log.spit("ME VOY A EJECUTAR " + Thread.currentThread().getName()+"  Disparo: "+hilo.strTarea());
 			mutex.acquire();

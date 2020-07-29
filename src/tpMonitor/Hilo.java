@@ -2,22 +2,27 @@ package tpMonitor;
 
 import java.util.ArrayList;
 
+
 public class Hilo implements Runnable{
 	int[] tarea;
+	int[] secundario;
 	Monitor monitor;
 	private boolean politico;
 	private int ID;
 	private int IDR;
+	private boolean terminado;
 	
-	public Hilo(Monitor monitor, int[] tarea, boolean politico, int ID, int IDR){
+	public Hilo(Monitor monitor, int[] tarea, int[] secundario, boolean politico, int ID, int IDR){
 		this.monitor = monitor;
 		this.tarea = tarea;
+		this.secundario = secundario;
 		this.politico = politico;
 		this.ID = ID;
 		this.IDR = IDR;
+		this.terminado = false;
 	}
 	
-	public void run(){
+	public void run(){		
 		for (int i = 0; i < 3; i++) {
 			try {
 				monitor.enter(this);
@@ -25,9 +30,12 @@ public class Hilo implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			int[] aux = tarea;
+            tarea = secundario;
+            secundario = aux;
 		}
+		terminado = true;
 	}
-	
 	
 	public String strTarea() {
 		String v = "";
@@ -53,4 +61,7 @@ public class Hilo implements Runnable{
 		return IDR;
 	}
 	
+	public boolean getEstado() {
+		return terminado;
+	}
 }

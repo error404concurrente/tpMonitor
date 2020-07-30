@@ -84,7 +84,7 @@ public class Main {
 		
 		for(int i=0; i<N_TRANS;i++) {
 				hilito.add(new Thread(new Hilo(monitor, transiciones[i], false, i, i),"hilito "+i));
-			//	hilito.get(i).start();
+				hilito.get(i).start();
 		}
 	}
 }

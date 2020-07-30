@@ -38,7 +38,6 @@ public class Main {
 
 		int[] tSensibility = { 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0};
 		
-		final int cantHilos = 99;
 		//Tiempo en ms
 		long[] alfa = {70,  0,  0,  0,  0,  70,  70,  70,  0,  0,  0,  0,  70,  70,  70,  70,  70};
 		long[] beta = {0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff,  0xfffffff};
@@ -48,7 +47,7 @@ public class Main {
 
 
 		//Creacion de Monitor
-		Monitor monitor = new Monitor(cantHilos, rdp);
+		Monitor monitor = new Monitor(rdp);
 
 
 
@@ -103,8 +102,15 @@ public class Main {
 		}
 
 		while(!politica.terminado()) {
-			//Puto el que lee
+			//esperando a que termine
 		}
+		
+		//Ya sabemos que no hay que usarlo, pero es para que los hilos 
+		//no se queden durmiendo y se frene la ejecucion
+		for(int i=0; i<hilito.size();i++) {
+			hilito.get(i).stop();
+	}
+		
 		Log.spit("Tares ejecutadas en Procesador 1: "+Politicas.contador.get(3)+"\n\t- Tareas Tipo 1 ejecutadas: "+Politicas.contador.get(16)+"\n\t- Tareas Tipo 2 ejecutadas: "+(Politicas.contador.get(6)/2));
 		Log.spit("Tares ejecutadas en Procesador 2: "+Politicas.contador.get(4)+"\n\t- Tareas Tipo 1 ejecutadas: "+Politicas.contador.get(5)+"\n\t- Tareas Tipo 2 ejecutadas: "+(Politicas.contador.get(7)/2));
 		Log.spit("Tares guardadas en Memoria 1: "+Politicas.contador.get(8));

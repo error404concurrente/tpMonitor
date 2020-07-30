@@ -23,16 +23,11 @@ public class RedDePetri {
 		this.beta = beta;
 		
 		transTimestamp = new long[tranSensibilizadas.length];
+		
 		for (int i = 0; i < transTimestamp .length; i++) {
 			transTimestamp[i]=System.currentTimeMillis();
 		}
 		
-//		Log.spit("P-invariantes");
-		//farkasAlgorithm(concatMatrix(inc,getidentityMatrix(inc.length)),inc.length,inc[0].length);
-
-//		Log.spit("T-invariantes");
-		//int [][] mT = getTranspuesta(inc);
-		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
 	}
 
 	public void changeCurrent(int[] newCurrent) {
@@ -51,8 +46,8 @@ public class RedDePetri {
 //		Log.spit("-------------- Fin Resultados --------------");
 		Politicas.aumentar(hilo);
 		Log.addDisparo(hilo.getTarea());
-		//int [][] mT = getTranspuesta(matrizIncidencia);
-		//farkasAlgorithm(concatMatrix(mT,getidentityMatrix(mT.length)),mT.length,mT[0].length);
+		//showPinvariants();
+		
 	}
 
 	public boolean verificarCompatibilidad(int[] tarea,Hilo hilo) throws InterruptedException{
@@ -162,118 +157,44 @@ public class RedDePetri {
 		return 1000;
 	}
 	
-	private void farkasAlgorithm(int[][] concat, int rowInc, int colInc) {
+	public void showPinvariants(int[][] pinvariant,int[] m) {
+		String s = "";
+		boolean first=false;
+		int k=0;
+		for(int i=0; i<pinvariant.length;i++){
+			first = true;
+			for(int j=0;j<pinvariant[0].length;j++) {
 
-		ArrayList<Integer> regPivot = new ArrayList<Integer>();
-		int pivot = 0, pivotNum = 0, factor = 0;
-		boolean notFind = true;
-
-		// Operaciones elementales para encontrar invariantes
-		for (int j = 0; j < colInc; j++) {
-			for (int i = 0; i < concat.length; i++) {
-
-				if (concat[i][j] != 0 && notFind) {
-					pivot    = i;
-					pivotNum = concat[i][j];
-					notFind  = false;
-					regPivot.add(pivot);
+				if(pinvariant[i][j]!=0 && first) {
+					s+= " P"+j+"("+m[j]+") ";
+					k += m[j];
+					first = false;
 				}
-				if (concat[i][j] != 0 && notFind == false && i != pivot) {
-					factor = (concat[i][j] == pivotNum) ? -1 : 1;
-					for (int k = 0; k < concat[0].length; k++) {
-						concat[i][k] = concat[i][k] + factor * (concat[pivot][k]);
-					}
+				else if(pinvariant[i][j]!=0){
+					  k += m[j];
+					  s += "+  P"+j+"("+m[j]+")";
 				}
 			}
-			for (int k = 0; k < concat[0].length; k++) {
-				concat[pivot][k] = 0;
-			}
-			notFind = true;
+			s+= "= "+k;
+		    Log.spit(s);
+			k=0;
+			s="";
 		}
-
-		// Se extraen las filas y columnas sin importancia
-		int row = 0;
-		int[][] invariants = new int[rowInc - regPivot.size()][rowInc];
-		for (int i = 0; i < concat.length; i++) {
-			for (int j = colInc; j < concat[0].length; j++) {
-				if (!regPivot.contains(i)) {
-					invariants[row][(j - colInc)] = concat[i][j];
-				}
-			}
-			if (!regPivot.contains(i)) {
-				row++;
-			}
-		}
-		//printMatrix(invariants);
-		Log.spit(printMatrix(invariants));
-	}
-
-
-
-
-	public int[][] getidentityMatrix(int N) {
-		int[][] identity = new int[N][N];
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				identity[i][j] = (i == j) ? 1 : 0;
-			}
-		}
-		return identity;
-	}
-
-	public int[][] concatMatrix(int[][] inc, int[][] id) {
-		int N = inc.length, M = inc[0].length + id[0].length;
-		int row = 0, col = 0;
-		int[][] concat = new int[N][M];
-		// Concatena la matriz de incidencia con la identidad
-		for (int j = 0; j < inc[0].length; j++) {
-			for (int i = 0; i < N; i++) {
-				concat[i][j] = inc[i][j];
-			}
-		}
-		for (int j = inc[0].length; j < M; j++) {
-			for (int i = 0; i < N; i++) {
-				concat[i][j] = id[row][col];
-				row++;
-			}
-			row = 0;
-			col++;
-		}
-		return concat;
-	}
-
-	public int[][] getTranspuesta(int[][] matrix) {
-		int[][] mT = new int[matrix[0].length][matrix.length];
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[i].length; j++) {
-				mT[j][i] = matrix[i][j];
-			}
-		}
-		return mT;
 	}
 
 	//Getters
 	public int[] getMarcaActual() {
 		return marcaActual;
 	}
+	
 	public int[][] getMatrizIncidencia() {
 		return matrizIncidencia;
 	}
+	
 	public int[] getMarcaInicial() {
 		return marcaInicial;
 	}
-	public String  printMatrix(int[][] matrix) {
-		String s = "";
-		for(int i=0; i<matrix.length ; i++) {
-			s+="\n[ ";
-			for(int j=0; j<matrix[0].length ; j++) {
-				s+=""+matrix[i][j]+", ";
-			}
-			s+="]";
-		}
-
-		return s;
-	}
+	
 	public String strTranSensible() {
 		String v = "";
 		for (int i = 0; i < tranSensibilizadas.length; i++) {

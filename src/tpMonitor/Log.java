@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Log {
-	private static final SimpleDateFormat sdfTitulo = new SimpleDateFormat("[dd:MM:yyyy]-[HH:mm:ss]: ");
+	private static final SimpleDateFormat sdfTitulo = new SimpleDateFormat("[dd_MM_yyyy]-[HH_mm_ss]");
 	public static PrintStream archivo;
 	public static ArrayList<Integer> disparos = new ArrayList<Integer>();
 	public static PrintStream consola;

@@ -5,19 +5,15 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Semaphore;
 
 public final class Monitor {
-	//TODO reemplazar Thread por lo que sea que usemos
+	
 	private RedDePetri rdp;
 	private Cola colaEspera;
-	private int size;
-
-
 	private Semaphore entrada;
 	private Semaphore mutex;
 
 
-	public Monitor(int max, RedDePetri red) {
+	public Monitor(RedDePetri red) {
 		rdp = red;
-		size = max;
 		entrada = new Semaphore(1,true);
 		mutex = new Semaphore(1,true);
 

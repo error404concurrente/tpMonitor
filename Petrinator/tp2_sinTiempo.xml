@@ -61,14 +61,14 @@
 <value>0</value>
 </capacity>
 </place>
-<place id="DisponibleM1">
+<place id="DisM1">
 <graphics>
 <position x="1020.0" y="105.0"/>
 </graphics>
 <name>
-<value>DisponibleM1</value>
+<value>DisM1</value>
 <graphics>
-<offset x="0.0" y="0.0"/>
+<offset x="0.0" y="1.1111111111111112"/>
 </graphics>
 </name>
 <initialMarking>
@@ -81,12 +81,12 @@
 <value>0</value>
 </capacity>
 </place>
-<place id="DisponibleM2">
+<place id="DispM2">
 <graphics>
 <position x="1020.0" y="615.0"/>
 </graphics>
 <name>
-<value>DisponibleM2</value>
+<value>DispM2</value>
 <graphics>
 <offset x="0.0" y="0.0"/>
 </graphics>
@@ -308,7 +308,7 @@
 <name>
 <value>ProcesandoP1</value>
 <graphics>
-<offset x="0.0" y="0.0"/>
+<offset x="3.3333333333333335" y="-1.1111111111111112"/>
 </graphics>
 </name>
 <initialMarking>
@@ -459,12 +459,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="EmpezarP1">
+<transition id="EP1">
 <graphics>
 <position x="480.0" y="195.0"/>
 </graphics>
 <name>
-<value>EmpezarP1</value>
+<value>EP1</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -485,38 +485,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="EmpezarP2">
+<transition id="EP2">
 <graphics>
 <position x="480.0" y="495.0"/>
 </graphics>
 <name>
-<value>EmpezarP2</value>
-<graphics>
-<offset x="-5.0" y="35.0"/>
-</graphics>
-</name>
-<orientation>
-<value>0</value>
-</orientation>
-<rate>
-<value>1.0</value>
-</rate>
-<timed>
-<value>false</value>
-</timed>
-<infiniteServer>
-<value>false</value>
-</infiniteServer>
-<priority>
-<value>1</value>
-</priority>
-</transition>
-<transition id="FinalizarT1P2">
-<graphics>
-<position x="705.0" y="495.0"/>
-</graphics>
-<name>
-<value>FinalizarT1P2</value>
+<value>EP2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -563,12 +537,38 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="FinalizarT2P2">
+<transition id="FT1P2">
+<graphics>
+<position x="705.0" y="495.0"/>
+</graphics>
+<name>
+<value>FT1P2</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="FT2P2">
 <graphics>
 <position x="810.0" y="585.0"/>
 </graphics>
 <name>
-<value>FinalizarT2P2</value>
+<value>FT2P2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -693,12 +693,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="ProcesarT2P1">
+<transition id="PT2P1">
 <graphics>
 <position x="615.0" y="120.0"/>
 </graphics>
 <name>
-<value>ProcesarT2P1</value>
+<value>PT2P1</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -719,12 +719,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="ProcesarT2P2">
+<transition id="PT2P2">
 <graphics>
 <position x="615.0" y="585.0"/>
 </graphics>
 <name>
-<value>ProcesarT2P2</value>
+<value>PT2P2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -745,12 +745,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="Solucion1">
+<transition id="s1">
 <graphics>
 <position x="1080.0" y="150.0"/>
 </graphics>
 <name>
-<value>Solucion1</value>
+<value>s1</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -771,12 +771,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="Solucion2">
+<transition id="s2">
 <graphics>
 <position x="1050.0" y="510.0"/>
 </graphics>
 <name>
-<value>Solucion2</value>
+<value>s2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -888,7 +888,7 @@
 <arcpath id="001" x="201" y="351" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ColaP1 to EmpezarP1" source="ColaP1" target="EmpezarP1">
+<arc id="ColaP1 to EmpezarP1" source="ColaP1" target="EP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -901,7 +901,7 @@
 <arcpath id="001" x="485" y="211" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ColaP2 to EmpezarP2" source="ColaP2" target="EmpezarP2">
+<arc id="ColaP2 to EmpezarP2" source="ColaP2" target="EP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -940,7 +940,7 @@
 <arcpath id="001" x="356" y="491" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM1 to P1M1" source="DisponibleM1" target="P1M1">
+<arc id="DisponibleM1 to P1M1" source="DisM1" target="P1M1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -953,7 +953,7 @@
 <arcpath id="001" x="915" y="155" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM1 to P2M1" source="DisponibleM1" target="P2M1">
+<arc id="DisponibleM1 to P2M1" source="DisM1" target="P2M1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -966,7 +966,7 @@
 <arcpath id="001" x="911" y="385" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM2 to P1M2" source="DisponibleM2" target="P1M2">
+<arc id="DisponibleM2 to P1M2" source="DispM2" target="P1M2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -979,7 +979,7 @@
 <arcpath id="001" x="911" y="295" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM2 to P2M2" source="DisponibleM2" target="P2M2">
+<arc id="DisponibleM2 to P2M2" source="DispM2" target="P2M2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -992,7 +992,7 @@
 <arcpath id="001" x="915" y="571" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP1 to LimiteColaP1" source="EmpezarP1" target="LimiteColaP1">
+<arc id="EmpezarP1 to LimiteColaP1" source="EP1" target="LimiteColaP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1005,7 +1005,7 @@
 <arcpath id="001" x="367" y="110" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP1 to ProcesandoP1" source="EmpezarP1" target="ProcesandoP1">
+<arc id="EmpezarP1 to ProcesandoP1" source="EP1" target="ProcesandoP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1018,7 +1018,7 @@
 <arcpath id="001" x="611" y="204" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP2 to LimiteColaP2" source="EmpezarP2" target="LimiteColaP2">
+<arc id="EmpezarP2 to LimiteColaP2" source="EP2" target="LimiteColaP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1031,7 +1031,7 @@
 <arcpath id="001" x="367" y="601" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP2 to ProcesadorP2" source="EmpezarP2" target="ProcesadorP2">
+<arc id="EmpezarP2 to ProcesadorP2" source="EP2" target="ProcesadorP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1044,7 +1044,7 @@
 <arcpath id="001" x="611" y="505" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT1P2 to ListoP2" source="FinalizarT1P2" target="ListoP2">
+<arc id="FinalizarT1P2 to ListoP2" source="FT1P2" target="ListoP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1057,7 +1057,7 @@
 <arcpath id="001" x="805" y="505" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT1P2 to RecursoTareas" source="FinalizarT1P2" target="RecursoTareas">
+<arc id="FinalizarT1P2 to RecursoTareas" source="FT1P2" target="RecursoTareas">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1096,7 +1096,7 @@
 <arcpath id="001" x="721" y="342" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT2P2 to ListoP2" source="FinalizarT2P2" target="ListoP2">
+<arc id="FinalizarT2P2 to ListoP2" source="FT2P2" target="ListoP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1109,7 +1109,7 @@
 <arcpath id="001" x="821" y="520" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT2P2 to RecursoTareas" source="FinalizarT2P2" target="RecursoTareas">
+<arc id="FinalizarT2P2 to RecursoTareas" source="FT2P2" target="RecursoTareas">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1200,7 +1200,7 @@
 <arcpath id="001" x="905" y="566" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="M1 to Solucion1" source="M1" target="Solucion1">
+<arc id="M1 to Solucion1" source="M1" target="s1">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1213,7 +1213,7 @@
 <arcpath id="001" x="1091" y="175" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="M2 to Solucion2" source="M2" target="Solucion2">
+<arc id="M2 to Solucion2" source="M2" target="s2">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1349,7 +1349,7 @@
 <arcpath id="002" x="505" y="641" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Procesador1 to EmpezarP1" source="Procesador1" target="EmpezarP1">
+<arc id="Procesador1 to EmpezarP1" source="Procesador1" target="EP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1362,7 +1362,7 @@
 <arcpath id="001" x="491" y="191" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Procesador2 to EmpezarP2" source="Procesador2" target="EmpezarP2">
+<arc id="Procesador2 to EmpezarP2" source="Procesador2" target="EP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1375,7 +1375,7 @@
 <arcpath id="001" x="491" y="521" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesadorP2 to FinalizarT1P2" source="ProcesadorP2" target="FinalizarT1P2">
+<arc id="ProcesadorP2 to FinalizarT1P2" source="ProcesadorP2" target="FT1P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1388,7 +1388,7 @@
 <arcpath id="001" x="710" y="506" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesadorP2 to ProcesarT2P2" source="ProcesadorP2" target="ProcesarT2P2">
+<arc id="ProcesadorP2 to ProcesarT2P2" source="ProcesadorP2" target="PT2P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1401,7 +1401,7 @@
 <arcpath id="001" x="626" y="581" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesandoP1 to ProcesarT2P1" source="ProcesandoP1" target="ProcesarT2P1">
+<arc id="ProcesandoP1 to ProcesarT2P1" source="ProcesandoP1" target="PT2P1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1427,7 +1427,7 @@
 <arcpath id="001" x="710" y="206" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesarT2P1 to Tarea2P1" source="ProcesarT2P1" target="Tarea2P1">
+<arc id="ProcesarT2P1 to Tarea2P1" source="PT2P1" target="Tarea2P1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1440,7 +1440,7 @@
 <arcpath id="001" x="701" y="130" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesarT2P2 to Tarea2P2" source="ProcesarT2P2" target="Tarea2P2">
+<arc id="ProcesarT2P2 to Tarea2P2" source="PT2P2" target="Tarea2P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1453,7 +1453,7 @@
 <arcpath id="001" x="715" y="595" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="RecursoTareas to EmpezarP1" source="RecursoTareas" target="EmpezarP1">
+<arc id="RecursoTareas to EmpezarP1" source="RecursoTareas" target="EP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1466,7 +1466,7 @@
 <arcpath id="001" x="495" y="211" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="RecursoTareas to EmpezarP2" source="RecursoTareas" target="EmpezarP2">
+<arc id="RecursoTareas to EmpezarP2" source="RecursoTareas" target="EP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1479,7 +1479,7 @@
 <arcpath id="001" x="495" y="501" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Solucion1 to DisponibleM1" source="Solucion1" target="DisponibleM1">
+<arc id="Solucion1 to DisponibleM1" source="s1" target="DisM1">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1492,7 +1492,7 @@
 <arcpath id="001" x="1042" y="125" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Solucion2 to DisponibleM2" source="Solucion2" target="DisponibleM2">
+<arc id="Solucion2 to DisponibleM2" source="s2" target="DispM2">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1544,7 +1544,7 @@
 <arcpath id="001" x="800" y="131" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Tarea2P2 to FinalizarT2P2" source="Tarea2P2" target="FinalizarT2P2">
+<arc id="Tarea2P2 to FinalizarT2P2" source="Tarea2P2" target="FT2P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>

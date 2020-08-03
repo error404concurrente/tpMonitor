@@ -105,11 +105,9 @@ public class RedDePetri {
 			for (int j = 0; j < matrizIncidencia.length; j++) { // Recorrer filas
 				s[j] = marcaActual[j] + matrizIncidencia[j][i]; // Calculo de S
 			}
-			/**
-			 * Crear nuevo vector de transiciones sensibilizadas En la posicion i va a ser 1
-			 * si no hay valores negativos en S, de otra forma será 0
-			 */
-
+			
+			  //Crear nuevo vector de transiciones sensibilizadas En la posicion i va a ser 1
+			  //si no hay valores negativos en S, de otra forma ser
 			tranSensibilizadas[i] = 1;
 //			transTimestamp[i]=System.currentTimeMillis();
 			for (int x = 0; x < s.length; x++) {

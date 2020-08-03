@@ -11,8 +11,8 @@ public class Cola {
 	private Semaphore entrada;
 
 	public Cola(RedDePetri rdp, Semaphore entrada) {
-		this.rdp = rdp;
-		espera = new ConcurrentLinkedDeque<Hilo>();
+		this.rdp     = rdp;
+		espera       = new ConcurrentLinkedDeque<Hilo>();
 		this.entrada = entrada;
 	}
 	

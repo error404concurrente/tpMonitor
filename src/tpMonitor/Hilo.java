@@ -4,19 +4,20 @@ import java.util.ArrayList;
 
 
 public class Hilo implements Runnable{
-	int[] tarea;
-	int[] secundario;
-	Monitor monitor;
+	
 	private boolean politico;
-	private int ID;
 	private int IDR;
+	private int ID;
+	Monitor monitor;
+	int[] secundario;
+	int[] tarea;
 	
 	public Hilo(Monitor monitor, int[] tarea, int[] secundario, boolean politico, int ID, int IDR){
-		this.monitor = monitor;
-		this.tarea = tarea;
+		this.monitor    = monitor;
+		this.tarea      = tarea;
 		this.secundario = secundario;
-		this.politico = politico;
-		this.ID = ID;
+		this.politico   = politico;
+		this.ID  = ID;
 		this.IDR = IDR;
 	}
 	
@@ -25,11 +26,10 @@ public class Hilo implements Runnable{
 			try {
 				monitor.enter(this);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			int[] aux = tarea;
-            tarea = secundario;
+			int[] aux  = tarea;
+            tarea      = secundario;
             secundario = aux;
 		}
 	}

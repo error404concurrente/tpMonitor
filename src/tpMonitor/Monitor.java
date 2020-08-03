@@ -13,10 +13,9 @@ public final class Monitor {
 
 
 	public Monitor(RedDePetri red) {
-		rdp = red;
-		entrada = new Semaphore(1,true);
-		mutex = new Semaphore(1,true);
-
+		rdp        = red;
+		entrada    = new Semaphore(1,true);
+		mutex      = new Semaphore(1,true);
 		colaEspera = new Cola(rdp,entrada);
 	}
 
@@ -25,7 +24,6 @@ public final class Monitor {
 		try {
 //			Log.spit("Hilo entrante: "+Thread.currentThread().getName());
 			entrada.acquire();
-			
 			mutex.acquire();
 		} catch (InterruptedException e) {
 			Log.spit("ERROR DE ENTRADA DE MONITOR AIUDA");

@@ -61,14 +61,14 @@
 <value>0</value>
 </capacity>
 </place>
-<place id="DisM1">
+<place id="DisponibleM1">
 <graphics>
 <position x="1020.0" y="105.0"/>
 </graphics>
 <name>
-<value>DisM1</value>
+<value>DisponibleM1</value>
 <graphics>
-<offset x="0.0" y="1.1111111111111112"/>
+<offset x="0.0" y="0.0"/>
 </graphics>
 </name>
 <initialMarking>
@@ -81,12 +81,12 @@
 <value>0</value>
 </capacity>
 </place>
-<place id="DispM2">
+<place id="DisponibleM2">
 <graphics>
 <position x="1020.0" y="615.0"/>
 </graphics>
 <name>
-<value>DispM2</value>
+<value>DisponibleM2</value>
 <graphics>
 <offset x="0.0" y="0.0"/>
 </graphics>
@@ -308,7 +308,7 @@
 <name>
 <value>ProcesandoP1</value>
 <graphics>
-<offset x="3.3333333333333335" y="-1.1111111111111112"/>
+<offset x="0.0" y="0.0"/>
 </graphics>
 </name>
 <initialMarking>
@@ -459,12 +459,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="EP1">
+<transition id="EmpezarP1">
 <graphics>
 <position x="480.0" y="195.0"/>
 </graphics>
 <name>
-<value>EP1</value>
+<value>EmpezarP1</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -485,12 +485,38 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="EP2">
+<transition id="EmpezarP2">
 <graphics>
 <position x="480.0" y="495.0"/>
 </graphics>
 <name>
-<value>EP2</value>
+<value>EmpezarP2</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="FinalizarT1P2">
+<graphics>
+<position x="705.0" y="495.0"/>
+</graphics>
+<name>
+<value>FinalizarT1P2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -537,38 +563,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="FT1P2">
-<graphics>
-<position x="705.0" y="495.0"/>
-</graphics>
-<name>
-<value>FT1P2</value>
-<graphics>
-<offset x="-5.0" y="35.0"/>
-</graphics>
-</name>
-<orientation>
-<value>0</value>
-</orientation>
-<rate>
-<value>1.0</value>
-</rate>
-<timed>
-<value>false</value>
-</timed>
-<infiniteServer>
-<value>false</value>
-</infiniteServer>
-<priority>
-<value>1</value>
-</priority>
-</transition>
-<transition id="FT2P2">
+<transition id="FinalizarT2P2">
 <graphics>
 <position x="810.0" y="585.0"/>
 </graphics>
 <name>
-<value>FT2P2</value>
+<value>FinalizarT2P2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -693,12 +693,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="PT2P1">
+<transition id="ProcesarT2P1">
 <graphics>
 <position x="615.0" y="120.0"/>
 </graphics>
 <name>
-<value>PT2P1</value>
+<value>ProcesarT2P1</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -719,12 +719,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="PT2P2">
+<transition id="ProcesarT2P2">
 <graphics>
 <position x="615.0" y="585.0"/>
 </graphics>
 <name>
-<value>PT2P2</value>
+<value>ProcesarT2P2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -745,12 +745,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="s1">
+<transition id="Solucion1">
 <graphics>
 <position x="1080.0" y="150.0"/>
 </graphics>
 <name>
-<value>s1</value>
+<value>Solucion1</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -771,12 +771,12 @@
 <value>1</value>
 </priority>
 </transition>
-<transition id="s2">
+<transition id="Solucion2">
 <graphics>
 <position x="1050.0" y="510.0"/>
 </graphics>
 <name>
-<value>s2</value>
+<value>Solucion2</value>
 <graphics>
 <offset x="-5.0" y="35.0"/>
 </graphics>
@@ -832,8 +832,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="285" y="341" curvePoint="false"/>
-<arcpath id="001" x="341" y="340" curvePoint="false"/>
+<arcpath id="000" x="286" y="342" curvePoint="false"/>
+<arcpath id="001" x="342" y="342" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="AsignarP1 to ColaP1" source="AsignarP1" target="ColaP1">
@@ -845,8 +845,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="360" y="205" curvePoint="false"/>
-<arcpath id="001" x="415" y="205" curvePoint="false"/>
+<arcpath id="000" x="361" y="207" curvePoint="false"/>
+<arcpath id="001" x="417" y="207" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="AsignarP1 to P0" source="AsignarP1" target="P0">
@@ -858,8 +858,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="350" y="206" curvePoint="false"/>
-<arcpath id="001" x="202" y="331" curvePoint="false"/>
+<arcpath id="000" x="351" y="207" curvePoint="false"/>
+<arcpath id="001" x="203" y="332" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="AsignarP2 to ColaP2" source="AsignarP2" target="ColaP2">
@@ -871,8 +871,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="360" y="505" curvePoint="false"/>
-<arcpath id="001" x="415" y="505" curvePoint="false"/>
+<arcpath id="000" x="361" y="507" curvePoint="false"/>
+<arcpath id="001" x="417" y="507" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="AsignarP2 to P0" source="AsignarP2" target="P0">
@@ -884,11 +884,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="350" y="506" curvePoint="false"/>
-<arcpath id="001" x="201" y="351" curvePoint="false"/>
+<arcpath id="000" x="351" y="507" curvePoint="false"/>
+<arcpath id="001" x="202" y="352" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ColaP1 to EmpezarP1" source="ColaP1" target="EP1">
+<arc id="ColaP1 to EmpezarP1" source="ColaP1" target="EmpezarP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -897,11 +897,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="445" y="206" curvePoint="false"/>
-<arcpath id="001" x="485" y="211" curvePoint="false"/>
+<arcpath id="000" x="446" y="207" curvePoint="false"/>
+<arcpath id="001" x="486" y="212" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ColaP2 to EmpezarP2" source="ColaP2" target="EP2">
+<arc id="ColaP2 to EmpezarP2" source="ColaP2" target="EmpezarP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -910,8 +910,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="445" y="504" curvePoint="false"/>
-<arcpath id="001" x="485" y="501" curvePoint="false"/>
+<arcpath id="000" x="446" y="507" curvePoint="false"/>
+<arcpath id="001" x="487" y="502" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ColaProcesos to AsignarP1" source="ColaProcesos" target="AsignarP1">
@@ -923,8 +923,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="355" y="325" curvePoint="false"/>
-<arcpath id="001" x="355" y="221" curvePoint="false"/>
+<arcpath id="000" x="357" y="327" curvePoint="false"/>
+<arcpath id="001" x="357" y="222" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ColaProcesos to AsignarP2" source="ColaProcesos" target="AsignarP2">
@@ -936,11 +936,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="355" y="355" curvePoint="false"/>
-<arcpath id="001" x="356" y="491" curvePoint="false"/>
+<arcpath id="000" x="357" y="356" curvePoint="false"/>
+<arcpath id="001" x="357" y="492" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM1 to P1M1" source="DisM1" target="P1M1">
+<arc id="DisponibleM1 to P1M1" source="DisponibleM1" target="P1M1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -949,11 +949,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1016" y="120" curvePoint="false"/>
-<arcpath id="001" x="915" y="155" curvePoint="false"/>
+<arcpath id="000" x="1018" y="122" curvePoint="false"/>
+<arcpath id="001" x="917" y="157" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM1 to P2M1" source="DisM1" target="P2M1">
+<arc id="DisponibleM1 to P2M1" source="DisponibleM1" target="P2M1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -962,11 +962,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1024" y="128" curvePoint="false"/>
-<arcpath id="001" x="911" y="385" curvePoint="false"/>
+<arcpath id="000" x="1025" y="130" curvePoint="false"/>
+<arcpath id="001" x="912" y="387" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM2 to P1M2" source="DispM2" target="P1M2">
+<arc id="DisponibleM2 to P1M2" source="DisponibleM2" target="P1M2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -975,11 +975,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1025" y="611" curvePoint="false"/>
-<arcpath id="001" x="911" y="295" curvePoint="false"/>
+<arcpath id="000" x="1026" y="612" curvePoint="false"/>
+<arcpath id="001" x="912" y="297" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="DisponibleM2 to P2M2" source="DispM2" target="P2M2">
+<arc id="DisponibleM2 to P2M2" source="DisponibleM2" target="P2M2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -988,11 +988,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1016" y="618" curvePoint="false"/>
-<arcpath id="001" x="915" y="571" curvePoint="false"/>
+<arcpath id="000" x="1018" y="620" curvePoint="false"/>
+<arcpath id="001" x="916" y="572" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP1 to LimiteColaP1" source="EP1" target="LimiteColaP1">
+<arc id="EmpezarP1 to LimiteColaP1" source="EmpezarP1" target="LimiteColaP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1001,11 +1001,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="485" y="201" curvePoint="false"/>
-<arcpath id="001" x="367" y="110" curvePoint="false"/>
+<arcpath id="000" x="487" y="202" curvePoint="false"/>
+<arcpath id="001" x="368" y="111" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP1 to ProcesandoP1" source="EP1" target="ProcesandoP1">
+<arc id="EmpezarP1 to ProcesandoP1" source="EmpezarP1" target="ProcesandoP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1014,11 +1014,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="495" y="201" curvePoint="false"/>
-<arcpath id="001" x="611" y="204" curvePoint="false"/>
+<arcpath id="000" x="497" y="202" curvePoint="false"/>
+<arcpath id="001" x="612" y="207" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP2 to LimiteColaP2" source="EP2" target="LimiteColaP2">
+<arc id="EmpezarP2 to LimiteColaP2" source="EmpezarP2" target="LimiteColaP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1027,11 +1027,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="485" y="511" curvePoint="false"/>
-<arcpath id="001" x="367" y="601" curvePoint="false"/>
+<arcpath id="000" x="486" y="512" curvePoint="false"/>
+<arcpath id="001" x="368" y="602" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="EmpezarP2 to ProcesadorP2" source="EP2" target="ProcesadorP2">
+<arc id="EmpezarP2 to ProcesadorP2" source="EmpezarP2" target="ProcesadorP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1040,11 +1040,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="495" y="511" curvePoint="false"/>
-<arcpath id="001" x="611" y="505" curvePoint="false"/>
+<arcpath id="000" x="496" y="512" curvePoint="false"/>
+<arcpath id="001" x="612" y="507" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT1P2 to ListoP2" source="FT1P2" target="ListoP2">
+<arc id="FinalizarT1P2 to ListoP2" source="FinalizarT1P2" target="ListoP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1053,11 +1053,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="720" y="505" curvePoint="false"/>
-<arcpath id="001" x="805" y="505" curvePoint="false"/>
+<arcpath id="000" x="721" y="507" curvePoint="false"/>
+<arcpath id="001" x="807" y="507" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT1P2 to RecursoTareas" source="FT1P2" target="RecursoTareas">
+<arc id="FinalizarT1P2 to RecursoTareas" source="FinalizarT1P2" target="RecursoTareas">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1066,8 +1066,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="716" y="491" curvePoint="false"/>
-<arcpath id="001" x="715" y="370" curvePoint="false"/>
+<arcpath id="000" x="717" y="492" curvePoint="false"/>
+<arcpath id="001" x="717" y="371" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="FinalizarT2P1 to ListoP1" source="FinalizarT2P1" target="ListoP1">
@@ -1079,8 +1079,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="805" y="145" curvePoint="false"/>
-<arcpath id="001" x="805" y="191" curvePoint="false"/>
+<arcpath id="000" x="807" y="147" curvePoint="false"/>
+<arcpath id="001" x="807" y="192" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="FinalizarT2P1 to RecursoTareas" source="FinalizarT2P1" target="RecursoTareas">
@@ -1092,11 +1092,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="805" y="145" curvePoint="false"/>
-<arcpath id="001" x="721" y="342" curvePoint="false"/>
+<arcpath id="000" x="807" y="147" curvePoint="false"/>
+<arcpath id="001" x="722" y="343" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT2P2 to ListoP2" source="FT2P2" target="ListoP2">
+<arc id="FinalizarT2P2 to ListoP2" source="FinalizarT2P2" target="ListoP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1105,11 +1105,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="821" y="581" curvePoint="false"/>
-<arcpath id="001" x="821" y="520" curvePoint="false"/>
+<arcpath id="000" x="822" y="582" curvePoint="false"/>
+<arcpath id="001" x="822" y="521" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="FinalizarT2P2 to RecursoTareas" source="FT2P2" target="RecursoTareas">
+<arc id="FinalizarT2P2 to RecursoTareas" source="FinalizarT2P2" target="RecursoTareas">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1118,8 +1118,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="821" y="581" curvePoint="false"/>
-<arcpath id="001" x="722" y="368" curvePoint="false"/>
+<arcpath id="000" x="822" y="582" curvePoint="false"/>
+<arcpath id="001" x="723" y="370" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="LimiteColaP1 to AsignarP1" source="LimiteColaP1" target="AsignarP1">
@@ -1131,8 +1131,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="355" y="115" curvePoint="false"/>
-<arcpath id="001" x="356" y="191" curvePoint="false"/>
+<arcpath id="000" x="357" y="116" curvePoint="false"/>
+<arcpath id="001" x="357" y="192" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="LimiteColaP2 to AsignarP2" source="LimiteColaP2" target="AsignarP2">
@@ -1144,8 +1144,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="355" y="595" curvePoint="false"/>
-<arcpath id="001" x="355" y="521" curvePoint="false"/>
+<arcpath id="000" x="357" y="597" curvePoint="false"/>
+<arcpath id="001" x="357" y="522" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ListoP1 to P1M1" source="ListoP1" target="P1M1">
@@ -1157,8 +1157,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="818" y="198" curvePoint="false"/>
-<arcpath id="001" x="905" y="161" curvePoint="false"/>
+<arcpath id="000" x="820" y="200" curvePoint="false"/>
+<arcpath id="001" x="906" y="162" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ListoP1 to P1M2" source="ListoP1" target="P1M2">
@@ -1170,8 +1170,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="817" y="214" curvePoint="false"/>
-<arcpath id="001" x="905" y="281" curvePoint="false"/>
+<arcpath id="000" x="818" y="216" curvePoint="false"/>
+<arcpath id="001" x="906" y="282" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ListoP2 to P2M1" source="ListoP2" target="P2M1">
@@ -1183,8 +1183,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="830" y="493" curvePoint="false"/>
-<arcpath id="001" x="905" y="401" curvePoint="false"/>
+<arcpath id="000" x="831" y="495" curvePoint="false"/>
+<arcpath id="001" x="906" y="402" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ListoP2 to P2M2" source="ListoP2" target="P2M2">
@@ -1196,11 +1196,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="832" y="514" curvePoint="false"/>
-<arcpath id="001" x="905" y="566" curvePoint="false"/>
+<arcpath id="000" x="834" y="515" curvePoint="false"/>
+<arcpath id="001" x="906" y="567" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="M1 to Solucion1" source="M1" target="s1">
+<arc id="M1 to Solucion1" source="M1" target="Solucion1">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1209,11 +1209,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1065" y="236" curvePoint="false"/>
-<arcpath id="001" x="1091" y="175" curvePoint="false"/>
+<arcpath id="000" x="1067" y="238" curvePoint="false"/>
+<arcpath id="001" x="1092" y="177" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="M2 to Solucion2" source="M2" target="s2">
+<arc id="M2 to Solucion2" source="M2" target="Solucion2">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1222,8 +1222,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1047" y="430" curvePoint="false"/>
-<arcpath id="001" x="1061" y="505" curvePoint="false"/>
+<arcpath id="000" x="1049" y="431" curvePoint="false"/>
+<arcpath id="001" x="1062" y="507" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P0 to ArrivalRate" source="P0" target="ArrivalRate">
@@ -1235,8 +1235,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="205" y="341" curvePoint="false"/>
-<arcpath id="001" x="275" y="341" curvePoint="false"/>
+<arcpath id="000" x="206" y="342" curvePoint="false"/>
+<arcpath id="001" x="276" y="342" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P1M1 to M1" source="P1M1" target="M1">
@@ -1248,8 +1248,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="915" y="165" curvePoint="false"/>
-<arcpath id="001" x="1047" y="243" curvePoint="false"/>
+<arcpath id="000" x="916" y="167" curvePoint="false"/>
+<arcpath id="001" x="1049" y="244" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P1M1 to Procesador1" source="P1M1" target="Procesador1">
@@ -1261,9 +1261,9 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="911" y="145" curvePoint="false"/>
-<arcpath id="001" x="912" y="56" curvePoint="false"/>
-<arcpath id="002" x="505" y="55" curvePoint="false"/>
+<arcpath id="000" x="912" y="147" curvePoint="false"/>
+<arcpath id="001" x="913" y="57" curvePoint="false"/>
+<arcpath id="002" x="507" y="57" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P1M2 to M2" source="P1M2" target="M2">
@@ -1275,8 +1275,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="915" y="281" curvePoint="false"/>
-<arcpath id="001" x="1035" y="404" curvePoint="false"/>
+<arcpath id="000" x="916" y="282" curvePoint="false"/>
+<arcpath id="001" x="1036" y="406" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P1M2 to Procesador1" source="P1M2" target="Procesador1">
@@ -1288,10 +1288,10 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="911" y="265" curvePoint="false"/>
-<arcpath id="001" x="942" y="12" curvePoint="false"/>
-<arcpath id="002" x="492" y="12" curvePoint="false"/>
-<arcpath id="003" x="491" y="41" curvePoint="false"/>
+<arcpath id="000" x="912" y="267" curvePoint="false"/>
+<arcpath id="001" x="943" y="13" curvePoint="false"/>
+<arcpath id="002" x="493" y="13" curvePoint="false"/>
+<arcpath id="003" x="492" y="42" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P2M1 to M1" source="P2M1" target="M1">
@@ -1303,8 +1303,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="915" y="401" curvePoint="false"/>
-<arcpath id="001" x="1050" y="261" curvePoint="false"/>
+<arcpath id="000" x="916" y="402" curvePoint="false"/>
+<arcpath id="001" x="1051" y="262" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P2M1 to Procesador2" source="P2M1" target="Procesador2">
@@ -1316,10 +1316,10 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="911" y="415" curvePoint="false"/>
-<arcpath id="001" x="942" y="672" curvePoint="false"/>
-<arcpath id="002" x="492" y="672" curvePoint="false"/>
-<arcpath id="003" x="491" y="655" curvePoint="false"/>
+<arcpath id="000" x="912" y="417" curvePoint="false"/>
+<arcpath id="001" x="943" y="673" curvePoint="false"/>
+<arcpath id="002" x="493" y="673" curvePoint="false"/>
+<arcpath id="003" x="492" y="656" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P2M2 to M2" source="P2M2" target="M2">
@@ -1331,8 +1331,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="915" y="561" curvePoint="false"/>
-<arcpath id="001" x="1035" y="426" curvePoint="false"/>
+<arcpath id="000" x="917" y="562" curvePoint="false"/>
+<arcpath id="001" x="1037" y="428" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="P2M2 to Procesador2" source="P2M2" target="Procesador2">
@@ -1344,12 +1344,12 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="911" y="581" curvePoint="false"/>
-<arcpath id="001" x="912" y="642" curvePoint="false"/>
-<arcpath id="002" x="505" y="641" curvePoint="false"/>
+<arcpath id="000" x="912" y="582" curvePoint="false"/>
+<arcpath id="001" x="913" y="643" curvePoint="false"/>
+<arcpath id="002" x="506" y="642" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Procesador1 to EmpezarP1" source="Procesador1" target="EP1">
+<arc id="Procesador1 to EmpezarP1" source="Procesador1" target="EmpezarP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1358,11 +1358,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="491" y="70" curvePoint="false"/>
-<arcpath id="001" x="491" y="191" curvePoint="false"/>
+<arcpath id="000" x="492" y="71" curvePoint="false"/>
+<arcpath id="001" x="492" y="192" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Procesador2 to EmpezarP2" source="Procesador2" target="EP2">
+<arc id="Procesador2 to EmpezarP2" source="Procesador2" target="EmpezarP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1371,11 +1371,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="490" y="625" curvePoint="false"/>
-<arcpath id="001" x="491" y="521" curvePoint="false"/>
+<arcpath id="000" x="492" y="627" curvePoint="false"/>
+<arcpath id="001" x="492" y="522" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesadorP2 to FinalizarT1P2" source="ProcesadorP2" target="FT1P2">
+<arc id="ProcesadorP2 to FinalizarT1P2" source="ProcesadorP2" target="FinalizarT1P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1384,11 +1384,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="641" y="505" curvePoint="false"/>
-<arcpath id="001" x="710" y="506" curvePoint="false"/>
+<arcpath id="000" x="641" y="507" curvePoint="false"/>
+<arcpath id="001" x="711" y="507" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesadorP2 to ProcesarT2P2" source="ProcesadorP2" target="PT2P2">
+<arc id="ProcesadorP2 to ProcesarT2P2" source="ProcesadorP2" target="ProcesarT2P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1397,11 +1397,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="625" y="520" curvePoint="false"/>
-<arcpath id="001" x="626" y="581" curvePoint="false"/>
+<arcpath id="000" x="627" y="521" curvePoint="false"/>
+<arcpath id="001" x="627" y="582" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesandoP1 to ProcesarT2P1" source="ProcesandoP1" target="PT2P1">
+<arc id="ProcesandoP1 to ProcesarT2P1" source="ProcesandoP1" target="ProcesarT2P1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1410,8 +1410,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="625" y="191" curvePoint="false"/>
-<arcpath id="001" x="625" y="145" curvePoint="false"/>
+<arcpath id="000" x="627" y="192" curvePoint="false"/>
+<arcpath id="001" x="627" y="147" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="ProcesandoP1 to T2" source="ProcesandoP1" target="T2">
@@ -1423,11 +1423,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="641" y="205" curvePoint="false"/>
-<arcpath id="001" x="710" y="206" curvePoint="false"/>
+<arcpath id="000" x="641" y="207" curvePoint="false"/>
+<arcpath id="001" x="711" y="207" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesarT2P1 to Tarea2P1" source="PT2P1" target="Tarea2P1">
+<arc id="ProcesarT2P1 to Tarea2P1" source="ProcesarT2P1" target="Tarea2P1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1436,11 +1436,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="630" y="131" curvePoint="false"/>
-<arcpath id="001" x="701" y="130" curvePoint="false"/>
+<arcpath id="000" x="631" y="132" curvePoint="false"/>
+<arcpath id="001" x="702" y="132" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="ProcesarT2P2 to Tarea2P2" source="PT2P2" target="Tarea2P2">
+<arc id="ProcesarT2P2 to Tarea2P2" source="ProcesarT2P2" target="Tarea2P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1449,11 +1449,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="630" y="595" curvePoint="false"/>
-<arcpath id="001" x="715" y="595" curvePoint="false"/>
+<arcpath id="000" x="631" y="597" curvePoint="false"/>
+<arcpath id="001" x="717" y="597" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="RecursoTareas to EmpezarP1" source="RecursoTareas" target="EP1">
+<arc id="RecursoTareas to EmpezarP1" source="RecursoTareas" target="EmpezarP1">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1462,11 +1462,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="703" y="347" curvePoint="false"/>
-<arcpath id="001" x="495" y="211" curvePoint="false"/>
+<arcpath id="000" x="704" y="348" curvePoint="false"/>
+<arcpath id="001" x="496" y="212" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="RecursoTareas to EmpezarP2" source="RecursoTareas" target="EP2">
+<arc id="RecursoTareas to EmpezarP2" source="RecursoTareas" target="EmpezarP2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1475,11 +1475,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="703" y="363" curvePoint="false"/>
-<arcpath id="001" x="495" y="501" curvePoint="false"/>
+<arcpath id="000" x="704" y="365" curvePoint="false"/>
+<arcpath id="001" x="497" y="502" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Solucion1 to DisponibleM1" source="s1" target="DisM1">
+<arc id="Solucion1 to DisponibleM1" source="Solucion1" target="DisponibleM1">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1488,11 +1488,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1085" y="161" curvePoint="false"/>
-<arcpath id="001" x="1042" y="125" curvePoint="false"/>
+<arcpath id="000" x="1086" y="162" curvePoint="false"/>
+<arcpath id="001" x="1043" y="126" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Solucion2 to DisponibleM2" source="s2" target="DispM2">
+<arc id="Solucion2 to DisponibleM2" source="Solucion2" target="DisponibleM2">
 <graphics/>
 <inscription>
 <value>Default,7</value>
@@ -1501,8 +1501,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="1061" y="535" curvePoint="false"/>
-<arcpath id="001" x="1035" y="611" curvePoint="false"/>
+<arcpath id="000" x="1062" y="537" curvePoint="false"/>
+<arcpath id="001" x="1036" y="612" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="T2 to ListoP1" source="T2" target="ListoP1">
@@ -1514,8 +1514,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="720" y="205" curvePoint="false"/>
-<arcpath id="001" x="791" y="205" curvePoint="false"/>
+<arcpath id="000" x="721" y="207" curvePoint="false"/>
+<arcpath id="001" x="792" y="207" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="T2 to RecursoTareas" source="T2" target="RecursoTareas">
@@ -1527,8 +1527,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="715" y="221" curvePoint="false"/>
-<arcpath id="001" x="715" y="341" curvePoint="false"/>
+<arcpath id="000" x="717" y="222" curvePoint="false"/>
+<arcpath id="001" x="717" y="342" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 <arc id="Tarea2P1 to FinalizarT2P1" source="Tarea2P1" target="FinalizarT2P1">
@@ -1540,11 +1540,11 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="731" y="131" curvePoint="false"/>
-<arcpath id="001" x="800" y="131" curvePoint="false"/>
+<arcpath id="000" x="731" y="132" curvePoint="false"/>
+<arcpath id="001" x="801" y="132" curvePoint="false"/>
 <type value="normal"/>
 </arc>
-<arc id="Tarea2P2 to FinalizarT2P2" source="Tarea2P2" target="FT2P2">
+<arc id="Tarea2P2 to FinalizarT2P2" source="Tarea2P2" target="FinalizarT2P2">
 <graphics/>
 <inscription>
 <value>Default,1</value>
@@ -1553,8 +1553,8 @@
 <tagged>
 <value>false</value>
 </tagged>
-<arcpath id="000" x="745" y="595" curvePoint="false"/>
-<arcpath id="001" x="815" y="596" curvePoint="false"/>
+<arcpath id="000" x="746" y="597" curvePoint="false"/>
+<arcpath id="001" x="816" y="597" curvePoint="false"/>
 <type value="normal"/>
 </arc>
 </net>
